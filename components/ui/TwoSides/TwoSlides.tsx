@@ -108,7 +108,7 @@ const Styled = styled.section<styledProps>`
    */
 `;
 
-interface TwoSlidesProps {
+interface TwoSlidesProps extends BtnProps {
   bgClr?: boolean;
   sideBg?: string;
   title: string;
@@ -118,7 +118,6 @@ interface TwoSlidesProps {
   avatarShow?: boolean;
   avatars?: avatars[];
   isSoccer?: boolean;
-  btn: BtnProps;
 }
 
 interface avatars {
@@ -136,13 +135,14 @@ const TwoSlides: React.FC<TwoSlidesProps> = ({
   avatarShow,
   avatars,
   isSoccer,
-  btn,
+  href,
+  as,
 }) => (
   <Styled className='two--slides' bgClr={bgClr} sideBg={sideBg}>
     <div className='content'>
       <h2 className={`title is-4 ${titleClass}`}>{title}</h2>
       <Paragraph text={subtitle} clr={bgClr} />
-      {!btnHide && <Btn {...btn} bgColor={!bgClr} />}
+      {!btnHide && <Btn href={href} as={as} bgColor={!bgClr} />}
       {/* Avatar */}
       {avatarShow && (
         <div className='avatars'>

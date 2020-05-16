@@ -19,7 +19,8 @@ const Home = ({ leagues }: HomeProps) => {
       <VideoHero />
       <PopularLeagues leagues={leagues} />
       <TwoSlides
-        btn={{ href: '/sport/[sportName]', as: '/sport/soccer' }}
+        href='/sport/[sportName]'
+        as='/sport/soccer'
         title='World’s Top Soccer'
         titleClass='title--dark'
         subtitle='See your favorite soccer legues. Cheack upcoming schedules and teams'
@@ -28,7 +29,8 @@ const Home = ({ leagues }: HomeProps) => {
         isSoccer
       />
       <TwoSlides
-        btn={{ href: '/sport/[sportName]', as: '/sport/egaming' }}
+        href='/sport/[sportName]'
+        as='/sport/egaming'
         title='e-gaming'
         subtitle='see your favorite gaming legues. Cheack upcoming schedules and teams '
         avatarShow
@@ -41,14 +43,15 @@ const Home = ({ leagues }: HomeProps) => {
         titleClass='title--dark'
         subtitle='For those gear addict’s, who enjoy the fast lines'
         bgImg
-        btn={{ href: '/sport/[sportName]', as: '/sport/motosport' }}
+        href='/sport/[sportName]'
+        as='/sport/motosport'
       />
       <MotoSports />
       <Banner
         bgClr
         title='see latest trasfers'
         subtitle='Check the latests news on your favorite teams changes'
-        btn={{ href: '/trasfers' }}
+        href='/trasfers'
       />
     </>
   );

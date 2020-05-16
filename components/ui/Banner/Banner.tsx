@@ -42,14 +42,13 @@ const Styled = styled.section<styledProps>`
     `}
 `;
 
-interface BannerProps {
+interface BannerProps extends BtnProps {
   bgClr?: boolean;
   bgImg?: boolean;
   title: string;
   titleClass?: string;
   subtitle?: string;
   btnHide?: boolean;
-  btn: BtnProps;
 }
 
 const Banner: React.FC<BannerProps> = ({
@@ -59,12 +58,13 @@ const Banner: React.FC<BannerProps> = ({
   btnHide,
   bgClr,
   bgImg,
-  btn,
+  href,
+  as,
 }) => (
   <Styled className='banner' bgClr={bgClr} bgImg={bgImg}>
     <h2 className={`title is-4 ${titleClass}`}>{title}</h2>
     <Paragraph text={subtitle} clr={bgClr} />
-    {!btnHide && <Btn {...btn} bgColor={!bgClr} />}
+    {!btnHide && <Btn href={href} as={as} bgColor={!bgClr} />}
   </Styled>
 );
 
