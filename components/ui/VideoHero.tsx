@@ -73,7 +73,7 @@ const VideoHero = () => (
           Sign up and customize your own favorite lists{' '}
         </p>
       </div>
-      <Btn href='/signup' />
+      <Btn href='/signup' title='sign up' />
     </div>
     <video autoPlay muted loop className='video--bg'>
       <source src='/bg_video.mp4' type='video/mp4' />

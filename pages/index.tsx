@@ -6,6 +6,8 @@ import { apiPoint } from '../components/context/types';
 import getData from '../components/utility/getData';
 import { popularLeague } from '../components/interfaces/legues';
 import TwoSlides from '../components/ui/TwoSides/TwoSlides';
+import Banner from '../components/ui/Banner/Banner';
+import MotoSports from '../components/ui/home/MotoSports';
 
 interface HomeProps {
   leagues?: popularLeague[];
@@ -16,7 +18,38 @@ const Home = ({ leagues }: HomeProps) => {
     <>
       <VideoHero />
       <PopularLeagues leagues={leagues} />
-      <TwoSlides />
+      <TwoSlides
+        btn={{ href: '/sport/[sportName]', as: '/sport/soccer' }}
+        title='World’s Top Soccer'
+        titleClass='title--dark'
+        subtitle='See your favorite soccer legues. Cheack upcoming schedules and teams'
+        avatarShow
+        avatars={[{ src: '/imgs/soccer_players.png', name: 'soccer players' }]}
+        isSoccer
+      />
+      <TwoSlides
+        btn={{ href: '/sport/[sportName]', as: '/sport/egaming' }}
+        title='e-gaming'
+        subtitle='see your favorite gaming legues. Cheack upcoming schedules and teams '
+        avatarShow
+        avatars={[{ src: '/imgs/egaming.png', name: 'e-gaming icon' }]}
+        bgClr
+        sideBg='egaming_bg'
+      />
+      <Banner
+        title='Motorsport'
+        titleClass='title--dark'
+        subtitle='For those gear addict’s, who enjoy the fast lines'
+        bgImg
+        btn={{ href: '/sport/[sportName]', as: '/sport/motosport' }}
+      />
+      <MotoSports />
+      <Banner
+        bgClr
+        title='see latest trasfers'
+        subtitle='Check the latests news on your favorite teams changes'
+        btn={{ href: '/trasfers' }}
+      />
     </>
   );
 };

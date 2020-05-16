@@ -22,6 +22,7 @@ const Styled = styled.a<styledProps>`
   -webkit-clip-path: polygon(0 0, 100% 0, 93% 100%, 0% 100%);
   clip-path: polygon(0 0, 100% 0, 93% 100%, 0% 100%);
   transition: var(--ease-in);
+  font-size: var(--fs-btn);
 
   svg {
     transition: var(--ease-in);
@@ -44,12 +45,13 @@ interface btnProps {
   href: string;
   as?: string;
   bgColor?: boolean;
+  title?: string;
 }
 
-const Btn = ({ href, as, bgColor }: btnProps) => (
+const Btn = ({ href, as, bgColor, title = 'view more' }: btnProps) => (
   <Link href={href} as={as}>
     <Styled className='btn' bgColor={bgColor}>
-      sign up <IoMdArrowDroprightCircle />
+      {title} <IoMdArrowDroprightCircle />
     </Styled>
   </Link>
 );

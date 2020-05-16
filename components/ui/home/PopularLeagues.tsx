@@ -15,11 +15,13 @@ const Styled = styled.section`
   justify-content: center;
   align-items: center;
 
-  .content {
-    display: flex;
+  .link--tag {
+    transition: var(--cubicbezier);
 
-    img {
-      width: 60px;
+    &:hover,
+    &:focus {
+      filter: grayscale(0.8);
+      opacity: 0.8;
     }
   }
 `;
@@ -40,7 +42,7 @@ export default ({ leagues }: PopularLeaguesProps) => {
             href='/league/[leagueName]/[leagueId]'
             as={`/league/${strLeague}/${idLeague}`}
           >
-            <a className='link--tag'>
+            <a className='link--tag' title={strLeague}>
               <img className='link--tag__img' src={strBadge} alt={strLeague} />
             </a>
           </Link>
