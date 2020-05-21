@@ -19,6 +19,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/utility/getData.ts"
+    "components/utility/getData.ts",
+    "components/context/SportsData/SportProvider.js"
   ]
 }

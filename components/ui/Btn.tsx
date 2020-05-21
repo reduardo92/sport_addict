@@ -1,10 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import { IoMdArrowDroprightCircle } from 'react-icons/io';
 
 interface styledProps {
   bgColor?: boolean;
+  whiteBtn?: boolean;
 }
 
 const Styled = styled.a<styledProps>`
@@ -39,18 +40,37 @@ const Styled = styled.a<styledProps>`
       transform: translateX(5px);
     }
   }
+
+  ${({ whiteBtn }) =>
+    whiteBtn &&
+    css`
+      background-color: var(--clr-white);
+      color: var(--clr-second);
+
+      &:hover,
+      &:focus {
+        color: var(--clr-second);
+      }
+    `}
 `;
 
-interface btnProps {
+export interface BtnProps {
   href: string;
   as?: string;
   bgColor?: boolean;
   title?: string;
+  whiteBtn?: boolean;
 }
 
-const Btn = ({ href, as, bgColor, title = 'view more' }: btnProps) => (
+const Btn = ({
+  href,
+  as,
+  bgColor,
+  title = 'view more',
+  whiteBtn,
+}: BtnProps) => (
   <Link href={href} as={as}>
-    <Styled className='btn' bgColor={bgColor}>
+    <Styled className='btn' bgColor={bgColor} whiteBtn={whiteBtn}>
       {title} <IoMdArrowDroprightCircle />
     </Styled>
   </Link>

@@ -3,13 +3,10 @@ export const SITE_URL = process.env.SITE_URL;
 export const BASE_URL = 'https://www.thesportsdb.com/api/v1/json/1/';
 export const IMG_URL =
   'https://www.thesportsdb.com/images/media/league/fanart/';
-export const IMG_URL_OR = 'https://image.tmdb.org/t/p/original';
-export const SET_MODAL_MEDIA = ' SET_MODAL_MEDIA';
-export const RESET_MODAL_MEDIA = ' RESET_MODAL_MEDIA';
+
 // DATA
-export const SET_SEARCH_DATA = 'SET_SEARCH_DATA';
-export const CLEAR_SEARCH_DATA = 'CLEAR_SEARCH_DATA';
-export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const SET_SPORT_DATA = 'SET_SPORT_DATA';
+export const SET_LEAGUES_DATA = 'SET_LEAGUES_DATA';
 // Alert Type
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';

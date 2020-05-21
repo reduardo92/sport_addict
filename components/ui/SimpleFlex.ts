@@ -6,7 +6,9 @@ interface SimpleFlexProps {
 
 const SimpleFlex = styled.div<SimpleFlexProps>`
   display: flex;
+  flex-wrap: nowrap;
   overflow-x: auto;
+  width: 100%;
   -webkit-overflow-scrolling: touch;
   scroll-snap-points-x: repeat(
     ${({ setWidth }) => (setWidth ? setWidth : '100%')}

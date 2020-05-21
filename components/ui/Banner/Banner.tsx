@@ -1,12 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Btn from '../Btn';
+import Btn, { BtnProps } from '../Btn';
 import Paragraph from '../Paragraph';
-import BtnProps from '../../interfaces/BtnProps';
 
 interface styledProps {
   bgClr?: boolean;
-  bgImg?: boolean;
+  bgImg?: BgImg;
   sideBg?: string;
 }
 
@@ -25,26 +24,42 @@ const Styled = styled.section<styledProps>`
     margin-top: 2em;
   }
 
+  &::before {
+    content: '';
+    position: absolute;
+    background: url('/imgs/black_lines.svg') no-repeat center center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+
   ${({ bgImg }) =>
-    bgImg &&
-    css`
-      &::before {
-        content: '';
-        position: absolute;
-        background: url('/imgs/speedDometer.jpg'}) no-repeat center center;
-        background-size: cover;
-        height: 100%;
-        width: 100%;
-        top: 0;
-        left: 0;
-        filter: opacity(0.06);
-      }
-    `}
+    bgImg === 1
+      ? css`
+          &::before {
+            background-image: url('/imgs/yelllow_lines.svg');
+          }
+        `
+      : bgImg === 2 &&
+        css`
+          &::before {
+            background-image: url('/imgs/speedDometer.jpg');
+            filter: opacity(0.06);
+          }
+        `}
 `;
+
+enum BgImg {
+  BlackLines, // 0
+  YelloLines, // 1
+  SpeedDometer, // 2
+}
 
 interface BannerProps extends BtnProps {
   bgClr?: boolean;
-  bgImg?: boolean;
+  bgImg?: BgImg;
   title: string;
   titleClass?: string;
   subtitle?: string;
@@ -60,11 +75,14 @@ const Banner: React.FC<BannerProps> = ({
   bgImg,
   href,
   as,
+  whiteBtn,
 }) => (
   <Styled className='banner' bgClr={bgClr} bgImg={bgImg}>
     <h2 className={`title is-4 ${titleClass}`}>{title}</h2>
     <Paragraph text={subtitle} clr={bgClr} />
-    {!btnHide && <Btn href={href} as={as} bgColor={!bgClr} />}
+    {!btnHide && (
+      <Btn href={href} as={as} bgColor={!bgClr} whiteBtn={whiteBtn} />
+    )}
   </Styled>
 );
 

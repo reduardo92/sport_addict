@@ -10,7 +10,7 @@ const Styled = styled.p<styledProps>`
   width: 80%;
 `;
 
-interface paragraphProps {
+export interface paragraphProps {
   text: string | ReactNode;
   clr?: boolean;
 }

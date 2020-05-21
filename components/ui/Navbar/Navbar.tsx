@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ActiveLink from '../ActiveLink';
 import FavoriteBar from './FavoriteBar';
+import Link from 'next/link';
 
 const Styled = styled.header`
   .navbar,
@@ -72,7 +73,9 @@ const Navbar = () => {
                 <a className='navbar-item'>rugby</a>
                 <a className='navbar-item'>volleyball</a>
                 <hr className='navbar-divider' />
-                <a className='navbar-item'>sports</a>
+                <Link href='/sports'>
+                  <a className='navbar-item'>sports</a>
+                </Link>
                 <a className='navbar-item'>players</a>
                 <a className='navbar-item'>tv channels</a>
                 <a className='navbar-item'>latest transfers</a>

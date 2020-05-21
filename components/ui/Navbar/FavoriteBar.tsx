@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
-const Styled = styled.div`
+const Styled = styled.div<{ bgClr: string }>`
   width: 100%;
   padding: 0.5em;
-  background-color: var(--clr-primary);
+  background-color: ${({ bgClr }) =>
+    bgClr === '/sports' ? 'var(--clr-third)' : 'var(--clr-primary)'};
 
   .container {
     display: flex;
@@ -27,9 +29,15 @@ const Styled = styled.div`
   }
 `;
 
-const FavoriteBar = () => {
+interface FavoriteBarProps {
+  bgClr?: string;
+}
+
+const FavoriteBar: React.FC<FavoriteBarProps> = () => {
+  const { pathname } = useRouter();
+
   return (
-    <Styled className='favorite__bar'>
+    <Styled className='favorite__bar' bgClr={pathname}>
       <div className='container'>
         <button className='favorite__icon'>
           <img src='/icons/favorite_Plus.svg' alt='favorite add icon' />

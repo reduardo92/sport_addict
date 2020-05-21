@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import Title from '../Title';
 import SimpleFlex from '../SimpleFlex';
-import { popularLeague } from '../../interfaces/legues';
+import { Leagues } from '../../interfaces/legues';
 import Link from 'next/link';
+import Badge from '../Badge';
 const Styled = styled.section`
   /* background-color: var(--clr-second); */
   background: url('/imgs/black_bg.jpg') no-repeat center center;
@@ -14,41 +15,37 @@ const Styled = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  .link--tag {
-    transition: var(--cubicbezier);
-
-    &:hover,
-    &:focus {
-      filter: grayscale(0.8);
-      opacity: 0.8;
-    }
-  }
 `;
 
 interface PopularLeaguesProps {
-  leagues?: popularLeague[];
+  leagues?: Leagues[];
 }
 
 export default ({ leagues }: PopularLeaguesProps) => {
   return (
     <Styled className=''>
       <Title title='Popular Leagues' />
-      {/* <div className='content'> */}
       <SimpleFlex setWidth='60px'>
-        {leagues?.map(({ idLeague, strBadge, strLeague }) => (
-          <Link
+        {leagues?.map(({ idLeague, strBadge, strLeague, strSport }) => (
+          <Badge
             key={idLeague}
-            href='/league/[leagueName]/[leagueId]'
-            as={`/league/${strLeague}/${idLeague}`}
-          >
-            <a className='link--tag' title={strLeague}>
-              <img className='link--tag__img' src={strBadge} alt={strLeague} />
-            </a>
-          </Link>
+            href='/sports/[sport]/[sportName]/[id]'
+            as={`/sports/${strSport}/${strLeague}/${idLeague}`}
+            title={strLeague}
+            src={strBadge}
+          />
         ))}
       </SimpleFlex>
-      {/* </div> */}
     </Styled>
   );
 };
+
+// <Link
+// key={idLeague}
+// href='/sports/[sport]/[sportName]/[id]'
+// as={`/sports/${strSport}/${strLeague}/${idLeague}`}
+// >
+// <a className='link--tag' title={strLeague}>
+//   <img className='link--tag__img' src={strBadge} alt={strLeague} />
+// </a>
+// </Link>

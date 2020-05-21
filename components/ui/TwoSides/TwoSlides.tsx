@@ -1,10 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Btn from '../Btn';
+import Btn, { BtnProps } from '../Btn';
 import Link from 'next/link';
 import { topSoccer } from '../../interfaces/TopSoccer';
 import Paragraph from '../Paragraph';
-import BtnProps from '../../interfaces/BtnProps';
 
 interface styledProps {
   bgClr?: boolean;
@@ -161,8 +160,8 @@ const TwoSlides: React.FC<TwoSlidesProps> = ({
         topSoccer.map(({ id, src, title }) => (
           <Link
             key={id}
-            href='/league/[leagueName]/[leagueId]'
-            as={`/league/${title}/${id}`}
+            href='/sports/[sport]/[sportName]/[id]'
+            as={`/sports/soccer/${title}/${id}`}
           >
             <a className='link--tag' title={title}>
               <img className='link--tag__img' src={src} alt={title} />
