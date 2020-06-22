@@ -36,6 +36,7 @@ export const getServerSideProps: GetServerSideProps<SportsProps> = async ({
 
   const filter_Sports_by_query = async () => {
     if (!query.q) return null;
+    
     const leaguesRoutesArry: string[] = leagues
       .filter((league) => league.strSport === query.q)
       .map((item) => `${lookUp_league_id}${item.idLeague}`);

@@ -44,7 +44,7 @@ const SportsLayout: React.FC<SportsLayoutProps> = ({ data }) => {
               src={strBadge}
               title={strLeague}
               clr
-              onload
+              // onload
             />
           ))}
         </GridAuto>

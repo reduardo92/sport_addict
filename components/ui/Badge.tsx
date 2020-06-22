@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
 import Paragraph from './Paragraph';
 import Spinner from './StyleComponents/Styless/Spinner';
 
@@ -10,6 +10,7 @@ const Styled = styled.a`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 
   & > .para {
     width: fit-content;

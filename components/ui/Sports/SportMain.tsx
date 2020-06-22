@@ -70,7 +70,7 @@ const SportMain: React.FC<SportMainProps> = ({
                   title={strLeague}
                   src={strBadge}
                   clr
-                  onload
+                  // onload
                 />
               )
             )}

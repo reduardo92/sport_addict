@@ -36,7 +36,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           name='viewport'
           content='initial-scale=1.0, width=device-width'
           key='viewport'
-        />
+        />  
         <meta
           name='description'
           content='Sport information and stats from your favorite teams or players'
@@ -50,9 +50,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
               .then((item) => item.flatMap(({ data }) => Object.values(data))),
         }}
       >
-        <SportProvider>
+        <SportProvider >
           <Layout>
-            <Component {...pageProps} />
+            <Component {...pageProps} /> 
           </Layout>
         </SportProvider>
       </SWRConfig>
