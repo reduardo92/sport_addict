@@ -6,7 +6,7 @@ interface styledProps {
 }
 
 const Styled = styled.p<styledProps>`
-  color: ${({ clr }) => (clr ? 'var(--clr-grey)' : 'var(--clr-second)')};
+  color: ${({ clr }) => (clr ? 'var(--clr-white)' : 'var(--clr-second)')};
   width: 80%;
 `;
 

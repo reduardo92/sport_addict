@@ -152,3 +152,12 @@ p {
 .d-inline {
   display: inline-block;
 }
+
+// Grid minMax Helper
+.gridMinMax {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  & > div {
+    grid-column: 2 / 2;
+  }
+}

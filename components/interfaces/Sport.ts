@@ -24,4 +24,5 @@ export interface Sport {
   strYoutube: string;
   idCup: string;
   intFormedYear: string;
+  strLeagueAlternate: string;
 }

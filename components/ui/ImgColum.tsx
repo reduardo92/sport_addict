@@ -8,7 +8,7 @@ const Styled = styled.figure`
 
   &:hover,
   &:focus {
-    transform: scale(1.1, 1.3);
+    transform: scale(0.95);
   }
 `;
 
@@ -23,7 +23,7 @@ const ImgColum: React.FC<ImgColumProps> = ({ item, isColumn, className }) => {
 
   return (
     <Styled
-      className={`image ${isColumn && 'column'} ${className}`}
+      className={`image img--colum ${isColumn && 'column'} ${className}`}
       onClick={() => setModalImg!(item)}
     >
       <img src={item} alt='image' />

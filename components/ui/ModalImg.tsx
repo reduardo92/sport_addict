@@ -16,7 +16,11 @@ const ModalImg: React.FC = () => {
       ></div>
       <div className='modal-content'>
         <p className='image is-4by3'>
-          <img src={modalImg.src} alt='fan art' />
+          <img
+            style={{ objectFit: 'contain' }}
+            src={modalImg.src}
+            alt='fan art'
+          />
         </p>
       </div>
       <button
