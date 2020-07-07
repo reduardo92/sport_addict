@@ -8,6 +8,7 @@ import ColumsSection from '../ColumsSection';
 import ImgColum from '../ImgColum';
 import SocialLinks from '../SocialLinks';
 import Bio from '../StyleComponents/Styless/Bio';
+import { mediaSizes } from '../variables/variables';
 import Seasons from './Seasons';
 
 const Styled = styled.section`
@@ -31,6 +32,15 @@ const Styled = styled.section`
   .fanart {
     .img--colum {
       max-width: 400px;
+    }
+  }
+
+  & .stickyColum .columns {
+    display: flex;
+  }
+  @media screen and (min-width: ${mediaSizes.table}) {
+    & .fanart .columns {
+      display: flex;
     }
   }
 `;

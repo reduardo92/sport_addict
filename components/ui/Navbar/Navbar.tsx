@@ -21,16 +21,27 @@ const Styled = styled.header`
     color: var(--clr-white);
     text-transform: uppercase;
     font-weight: var(--fw-bold);
+    border-top: 2px solid transparent;
 
     &:hover,
     &:focus {
       color: var(--clr-primary);
+      background-color: var(--clr-third);
+      border-top-color: var(--clr-primary);
     }
+  }
+
+  .selected {
+    color: var(--clr-primary);
+    background-color: var(--clr-third);
+    border-top-color: var(--clr-primary);
   }
 
   .buttons {
     & .button {
       transition: var(--cubicbezier);
+      text-transform: uppercase;
+      font-weight: var(--fw-bold);
       &:hover,
       &:focus {
         transform: scale(0.9);
@@ -39,9 +50,9 @@ const Styled = styled.header`
     }
 
     & > :first-child {
-      background-color: var(--clr-third);
-      border-color: var(--clr-third);
-      color: var(--clr-white);
+      background-color: var(--clr-primary);
+      border-color: var(--clr-primary);
+      color: var(--clr-second);
     }
   }
 
@@ -129,7 +140,7 @@ const Navbar = () => {
                 <a className='navbar-item'>fighting</a>
               </ActiveLink>
               <div className='navbar-item has-dropdown is-hoverable'>
-                <a className='navbar-link'>More</a>
+                <a className='navbar-link navbar-item'>More</a>
                 <div className='navbar-dropdown'>
                   <ActiveLink href='/sports?q=Tennis'>
                     <a className='navbar-item'>tennis</a>
@@ -161,13 +172,11 @@ const Navbar = () => {
             </div>
 
             <div className='navbar-end'>
-              <div className='navbar-item'>
-                <div className='buttons'>
-                  <a className='button'>
-                    <strong>Sign up</strong>
-                  </a>
-                  <a className='button is-light'>Log in</a>
-                </div>
+              <div className='buttons'>
+                <a className='button'>
+                  <strong>Sign up</strong>
+                </a>
+                <a className='button is-light'>Log in</a>
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { mediaSizes } from '../variables/variables';
 
 interface StyledProps {
   bannerHero: string;
@@ -7,9 +8,9 @@ interface StyledProps {
 
 const Styled = styled.section<StyledProps>`
   .banner--hero {
-    min-height: 15vh;
+    min-height: calc(17vh + 3em);
     background: url(${({ bannerHero }) =>
-        bannerHero ? bannerHero : '/imgs/grass.jpg'})
+      bannerHero ? bannerHero : '/imgs/grass.jpg'})
       no-repeat;
     background-size: cover;
     background-position: center;
@@ -28,7 +29,7 @@ const Styled = styled.section<StyledProps>`
       top: 0;
       height: 100%;
       width: 100%;
-      max-width: 120px;
+      max-width: 70px;
     }
 
     &::before {
@@ -47,6 +48,15 @@ const Styled = styled.section<StyledProps>`
       }
     }
   }
+
+
+  @media screen and (min-width: ${mediaSizes.table}) {
+    .banner--name {
+    &::before,
+    &::after {
+      max-width: 120px;
+    }
+  }
 `;
 
 interface HeroSportProps {
@@ -57,7 +67,7 @@ interface HeroSportProps {
 const HeroSport: React.FC<HeroSportProps> = ({ banner, leagueName }) => {
   return (
     <Styled className='single--sport--hero' bannerHero={banner}>
-      <section className='hero banner--hero'>
+      <section className='hero '>
         <div className='hero-body banner--hero'></div>
       </section>
       <section className='hero is-dark banner--name'>
