@@ -1,54 +1,43 @@
+import Link from 'next/link';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Btn, { BtnProps } from '../Btn';
-import Link from 'next/link';
 import { topSoccer } from '../../interfaces/TopSoccer';
+import Btn, { BtnProps } from '../Btn';
 import Paragraph from '../Paragraph';
+import SideStrips from '../StyleComponents/Styless/SideStrips';
+import { mediaSizes } from '../variables/variables';
 
 interface styledProps {
   bgClr?: boolean;
   sideBg?: string;
+  isFlip?: boolean;
 }
 
 const Styled = styled.section<styledProps>`
   background-color: ${({ bgClr }) =>
     bgClr ? 'var(--clr-second)' : 'var(--clr-primary)'};
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    background: url('/imgs/black_lines.svg') no-repeat center center;
-    background-size: cover;
-    height: 35%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0.8;
-    ${({ bgClr }) =>
-      bgClr &&
-      css`
-        background-image: url('/imgs/yelllow_lines.svg');
-      `}
-  }
+  display: grid;
+  grid-template-columns: 4em 1fr 1.5fr;
 
   .content {
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
-    text-align: center;
     z-index: 1;
-    padding: 2em 1em 0em;
+    padding: 2em 1em ;
+    max-width: 700px;
+    margin: auto;
 
     .avatars {
-      width: 80%;
+      width: 100%;
       margin: 2em;
+      max-width: 400px;
+      align-self: center;
       &--item {
         filter: drop-shadow(4px 7px 6px rgba(0, 0, 0, 0.6));
       }
@@ -58,11 +47,11 @@ const Styled = styled.section<styledProps>`
   .side--image {
     position: relative;
     width: 100%;
+    height: 100%;
     background: var(--clr-second) url('/imgs/soccer_stadium.jpg') no-repeat
       center center;
     background-size: cover;
-    -webkit-clip-path: url(#mobile-svg);
-    clip-path: url(#mobile-svg);
+    clip-path: ellipse(87% 200% at 87% 0);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     place-items: center;
@@ -71,7 +60,7 @@ const Styled = styled.section<styledProps>`
     ${({ sideBg }) =>
       sideBg &&
       css`
-        background-image: url(/imgs/${sideBg}.jpg);
+        background-image: url(${sideBg});
       `}
 
     .link--tag {
@@ -83,28 +72,53 @@ const Styled = styled.section<styledProps>`
         filter: grayscale(0.5);
       }
     }
+  }
 
-    svg {
-      position: absolute;
-      pointer-events: none;
+  ${({ isFlip }) =>
+    isFlip &&
+    css`
+      grid-template-columns: 1.5fr 1fr 4em;
+
+      .side--image {
+        order: -1;
+        clip-path: ellipse(86% 199% at 0 0);
+}      }
+
+      .sideStrip {
+        order: 1;
+      }
+    `}
+
+
+    @media screen and (max-width: ${mediaSizes.table}) {
+      grid-template-columns: 1fr;
+
+
+      .content  {
+        align-items: center;
+      }
+
+      .side--image {
+          clip-path: none;
+        }
+
+      
+    ${({ isFlip }) =>
+      isFlip &&
+      css`
+        grid-template-columns: 1fr;
+
+        .side--image {
+          order: 0;
+          clip-path: none;
+          padding: 10em;
+        }
+
+        .sideStrip {
+          order: 0;
+        }
+      `}
     }
-  }
-
-  .side--image.push--up {
-    margin-top: -4em;
-    height: 100%;
-  }
-  .side--image.side-height {
-    height: 400px;
-  }
-
-  .svg--large {
-    display: none;
-  }
-
-  /* Tablet */
-  /* transform: scale(1.3) translateY(-13px);
-   */
 `;
 
 interface TwoSlidesProps extends BtnProps {
@@ -117,6 +131,9 @@ interface TwoSlidesProps extends BtnProps {
   avatarShow?: boolean;
   avatars?: avatars[];
   isSoccer?: boolean;
+  isFlip?: boolean;
+  isSideBlack?: boolean;
+  isMirror?: boolean;
 }
 
 interface avatars {
@@ -136,8 +153,16 @@ const TwoSlides: React.FC<TwoSlidesProps> = ({
   isSoccer,
   href,
   as,
+  isFlip,
+  isSideBlack,
+  isMirror,
 }) => (
-  <Styled className='two--slides' bgClr={bgClr} sideBg={sideBg}>
+  <Styled className='two--slides' bgClr={bgClr} sideBg={sideBg} isFlip={isFlip}>
+    <SideStrips
+      className='sideStrip'
+      isBlackStrip={isSideBlack}
+      mirror={isMirror}
+    />
     <div className='content'>
       <h2 className={`title is-4 ${titleClass}`}>{title}</h2>
       <Paragraph text={subtitle} clr={bgClr} />
@@ -152,7 +177,7 @@ const TwoSlides: React.FC<TwoSlidesProps> = ({
       )}
     </div>
     <div
-      className={`side--image before--black ${avatarShow && 'push--up'} ${
+      className={`side--image  ${avatarShow && 'push--up'} ${
         !isSoccer && 'side-height'
       }`}
     >
@@ -168,21 +193,6 @@ const TwoSlides: React.FC<TwoSlidesProps> = ({
             </a>
           </Link>
         ))}
-
-      <svg className='svg--movile'>
-        <clipPath id='mobile-svg' clipPathUnits='objectBoundingBox'>
-          <path
-            className='st0'
-            d='M1,0c0,0-0.3,0.1-0.5,0.1S0.3,0,0,0.1V1h1L1,0z'
-          />
-        </clipPath>
-      </svg>
-      <svg className='svg--large'>
-        <clipPath id='large-svg' clipPathUnits='objectBoundingBox'>
-          <path d='M0.101,0.43 C-0.228,0.599,0.358,1,0.382,1 H0.678 H1 V0.001 L0.585,0.003 C-0.387,-0.025,0.43,0.26,0.101,0.43'></path>
-        </clipPath>
-      </svg>
-      {/* transform: scale(1.1) translateX(-20px); */}
     </div>
   </Styled>
 );

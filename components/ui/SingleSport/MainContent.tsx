@@ -24,8 +24,13 @@ const Styled = styled.section`
     flex-wrap: wrap;
 
     .title {
-      margin-bottom: 0;
       margin-right: 10%;
+    }
+  }
+
+  .fanart {
+    .img--colum {
+      max-width: 400px;
     }
   }
 `;
@@ -48,6 +53,7 @@ const MainContent: React.FC<MainContentProps> = ({
     league.strFanart4,
   ];
 
+  // console.log(teams);
   return (
     <Styled className='mid--content column is-three-fifths'>
       <div className='top--links'>
@@ -57,7 +63,7 @@ const MainContent: React.FC<MainContentProps> = ({
         </p>
       </div>
       <div className='section--description'>
-        <h2 className='title'>DESCRIPTION</h2>
+        <h2 className='title subtitle'>DESCRIPTION</h2>
         <SocialLinks data={league} />
         <Bio bio={league.strDescriptionEN} />
       </div>
@@ -66,8 +72,13 @@ const MainContent: React.FC<MainContentProps> = ({
         idLeague={league.idLeague}
         nameLeague={league.strLeague}
       />
-      <ColumsSection title='teams'>
-        {teams.map(({ strTeam, strTeamBadge, idTeam }) => (
+      <ColumsSection title='fanart' className='fanart'>
+        {fanArry.map(
+          (art: string) => art && <ImgColum key={art} item={art} isColumn />
+        )}
+      </ColumsSection>
+      <ColumsSection title='teams' className='stickyColum'>
+        {teams?.map(({ strTeam, strTeamBadge, idTeam }) => (
           <Badge
             key={idTeam}
             href='/team/[teamName]/[id]'
@@ -77,11 +88,6 @@ const MainContent: React.FC<MainContentProps> = ({
             className='column is-2'
             clr
           />
-        ))}
-      </ColumsSection>
-      <ColumsSection title='fanart'>
-        {fanArry.map((art: string) => (
-          <ImgColum key={art} item={art} isColumn />
         ))}
       </ColumsSection>
     </Styled>

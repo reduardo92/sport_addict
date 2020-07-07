@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
 // Colors
 export const colors = {
   primary: '#fbc02d',
@@ -10,7 +8,7 @@ export const colors = {
 };
 
 // Media Sizes
-export const media = {
+export const mediaSizes = {
   table: '43.75em', // 700px
   size_900: '56.25em', // 900px
   table_lg: '62em', // 992px

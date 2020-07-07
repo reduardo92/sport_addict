@@ -1,13 +1,16 @@
+import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
-import Paragraph from '../Paragraph';
 import Btn from '../Btn';
+import Paragraph from '../Paragraph';
+import SideStrips from '../StyleComponents/Styless/SideStrips';
+import { mediaSizes } from '../variables/variables';
 
 const Styled = styled.section`
   background-color: var(--clr-second);
   background-color: var(--clr-primary);
   margin-bottom: 0 !important;
+  display: grid;
 
   .content {
     display: flex;
@@ -38,7 +41,8 @@ const Styled = styled.section`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 250px;
+    height: 100%;
+    min-height: 320px;
     width: 100%;
     transition: var(--cubicbezier);
     position: relative;
@@ -88,32 +92,44 @@ const Styled = styled.section`
       }
     }
   }
+
+  @media screen and (min-width: ${mediaSizes.table}) {
+    grid-template-columns: repeat(2, 1fr);
+
+    .main--text {
+      display: grid;
+      grid-template-columns: 4em 1fr;
+    }
+  }
 `;
 
 const ContactSports: React.FC = () => (
-  <Styled className='contact columns'>
-    <div className='content column'>
-      <h2 className='title is-4 title--dark'>contact sports</h2>
-      <Paragraph text='Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla ' />
-      <Btn href='/sports/[sport]' as='/sports/Fighting' bgColor />
+  <Styled className='contact'>
+    <div className='main--text'>
+      <SideStrips isBlackStrip mirror />
+      <div className='content '>
+        <h2 className='title is-4 title--dark'>contact sports</h2>
+        <Paragraph text='Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla ' />
+        <Btn href='/sports?q=Fighting' bgColor />
+      </div>
     </div>
     <Link
       href='/sports/[sport]/[sportName]/[id]'
       as={`/sports/Fighting/UFC/${4443}`}
     >
-      <a title='UFC' className='contact--link column'></a>
+      <a title='UFC' className='contact--link'></a>
     </Link>
     <Link
       href='/sports/[sport]/[sportName]/[id]'
       as={`/sports/Fighting/AEW/${4563}`}
     >
-      <a title='AEW' className='contact--link column'></a>
+      <a title='AEW' className='contact--link'></a>
     </Link>
     <Link
       href='/sports/[sport]/[sportName]/[id]'
       as={`/sports/Fighting/Boxing/${4445}`}
     >
-      <a title='Boxing' className='contact--link column'></a>
+      <a title='Boxing' className='contact--link'></a>
     </Link>
   </Styled>
 );

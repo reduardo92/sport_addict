@@ -1,6 +1,7 @@
+import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
+import { mediaSizes } from '../variables/variables';
 
 const Styled = styled.section`
   background-color: var(--clr-second);
@@ -15,14 +16,11 @@ const Styled = styled.section`
     height: 450px;
     width: 100%;
     transition: var(--cubicbezier);
+    overflow: hidden;
 
     &:hover,
     &:focus {
       filter: grayscale(0.7);
-    }
-
-    &__img {
-      display: block;
     }
 
     &:last-child {
@@ -32,10 +30,17 @@ const Styled = styled.section`
       background-image: url('/imgs/nascar.jpg');
     }
   }
+
+  @media screen and (min-width: ${mediaSizes.table}) {
+    display: flex;
+    .moto--link {
+      height: 500px;
+    }
+  }
 `;
 
 const MotoSports: React.FC = () => (
-  <Styled className='motosports columns'>
+  <Styled className='motosports columns '>
     <Link href='/sport/[sportName]/[id]' as={`/sport/IndyCar-Series/${4373}`}>
       <a title='Indycar Series' className='moto--link column'></a>
     </Link>

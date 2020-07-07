@@ -1,8 +1,14 @@
-import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
 
-export default ({ href, as, children }: any) => {
+interface ActiveLinkProps {
+  href: string;
+  as?: string;
+  children: any;
+}
+
+export default ({ href, as, children }: ActiveLinkProps) => {
   const router = useRouter();
 
   let className = children.props.className || '';

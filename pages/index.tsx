@@ -1,16 +1,14 @@
-import React, { useContext, useEffect } from 'react';
-import VideoHero from '../components/ui/VideoHero';
-import PopularLeagues from '../components/ui/home/PopularLeagues';
 import { GetStaticProps } from 'next';
-import { apiPoint, SET_SPORT_DATA } from '../components/context/types';
-import getData from '../components/utility/getData';
+import React from 'react';
+import { apiPoint } from '../components/context/types';
 import { Leagues } from '../components/interfaces/legues';
-import TwoSlides from '../components/ui/TwoSides/TwoSlides';
 import Banner from '../components/ui/Banner/Banner';
-import MotoSports from '../components/ui/home/MotoSports';
 import ContactSports from '../components/ui/home/ContactSports';
-import { AllSports } from '../components/interfaces/AllSports';
-import SportContext from '../components/context/SportsData/SportContext';
+import MotoSports from '../components/ui/home/MotoSports';
+import PopularLeagues from '../components/ui/home/PopularLeagues';
+import TwoSlides from '../components/ui/TwoSides/TwoSlides';
+import VideoHero from '../components/ui/VideoHero';
+import getData from '../components/utility/getData';
 
 interface HomeProps {
   popularLeagues: Leagues[];
@@ -23,31 +21,31 @@ const Home: React.FC<HomeProps> = ({ popularLeagues }) => {
       <VideoHero />
       <PopularLeagues leagues={popularLeagues} />
       <TwoSlides
-        href='/sports/[sport]'
-        as='/sports/soccer'
+        href='/sports?q=Soccer'
         title='World’s Top Soccer'
         titleClass='title--dark'
         subtitle='See your favorite soccer legues. Cheack upcoming schedules and teams'
         avatarShow
         avatars={[{ src: '/imgs/soccer_players.png', name: 'soccer players' }]}
         isSoccer
+        isMirror
+        isSideBlack
       />
       <TwoSlides
-        href='/sports/[sport]'
-        as='/sports/egaming'
+        href='/sports?q=ESports'
         title='e-gaming'
         subtitle='see your favorite gaming legues. Cheack upcoming schedules and teams '
         avatarShow
         avatars={[{ src: '/imgs/egaming.png', name: 'e-gaming icon' }]}
         bgClr
-        sideBg='egaming_bg'
+        sideBg='/imgs/egaming_bg.jpg'
+        isFlip
       />
       <Banner
+        href='/sports?q=Motorsport'
         title='Motorsport'
         titleClass='title--dark'
         subtitle='For those gear addict’s, who enjoy the fast lines'
-        href='/sports/[sport]'
-        as='/sports/motosport'
         bgImg={2}
       />
       <MotoSports />
@@ -69,14 +67,14 @@ const Home: React.FC<HomeProps> = ({ popularLeagues }) => {
         whiteBtn
       />
       <TwoSlides
-        href='/sports/[sport]/[sportName]/[id]'
-        as='/sports/Basketball/'
+        href='/team/[teamNae]/[id]'
+        as='/team/Chicago%20Bulls/134870'
         title='Chicago Bulls'
         titleClass='title--dark'
         subtitle='The Chicago Bulls are an American professional basketball team. They are based in Chicago, Illinois, playing in the Central Division of the Eastern Conference in the National Basketball Association (NBA). The team was founded on January 26, 1966. The Bulls play their home games at the United Center, also known as the "Madhouse on Madison"......'
-        // avatarShow
-        // avatars={[{ src: '/icons/bulls.png', name: 'bulls icon' }]}
-        sideBg='bullsStaduim'
+        sideBg='/imgs/bullsStaduim.jpg'
+        isSideBlack
+        isMirror
       />
     </>
   );
@@ -87,12 +85,11 @@ export default Home;
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const {
     lookUp: { lookUp_league_id },
-    no_param: { list_sports },
   } = apiPoint;
 
   const popularLeaguesIds = [
     `${lookUp_league_id}4391`,
-    `${lookUp_league_id}4481`,
+    `${lookUp_league_id}4480`,
     `${lookUp_league_id}4387`,
     `${lookUp_league_id}4380`,
     `${lookUp_league_id}4444`,
@@ -102,10 +99,6 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   ];
 
   const popularLeagues: Leagues[] = await getData(popularLeaguesIds, true);
-
-  // const { sports: allSports }: { sports: AllSports[] } = await getData(
-  //   list_sports
-  // );
 
   return {
     props: { popularLeagues },

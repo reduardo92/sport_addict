@@ -1,8 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 import { SeasonsProps } from '../../interfaces/Seasons';
 import Badge from '../Badge';
 import SimpleFlex from '../SimpleFlex';
 
+const Styled = styled.div`
+  .seasons--icons {
+    font-size: 0.8rem;
+  }
+`;
 interface SeasonsPropss {
   seasons: SeasonsProps[];
   idLeague: string;
@@ -14,7 +20,7 @@ const Seasons: React.FC<SeasonsPropss> = ({
   idLeague,
   nameLeague,
 }) => (
-  <div className='seasons'>
+  <Styled className='seasons'>
     <h2 className='title subtitle d-inline'>Seasons</h2>
     <SimpleFlex setWidth='35px'>
       {seasons.map(({ strSeason }) => (
@@ -24,11 +30,12 @@ const Seasons: React.FC<SeasonsPropss> = ({
           as={`/sports/${nameLeague}/${idLeague}`}
           title={strSeason}
           src={'/icons/calendar-season.png'}
+          className='seasons--icons'
           clr
         />
       ))}
     </SimpleFlex>
-  </div>
+  </Styled>
 );
 
 export default Seasons;

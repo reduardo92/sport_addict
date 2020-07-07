@@ -36,6 +36,7 @@ export const apiPoint = {
     list_in_country: `${BASE_URL}search_all_leagues.php?c=`,
     list_seasons_in_league: `${BASE_URL}search_all_seasons.php?id=`,
     list_all_team_in_league: `${BASE_URL}search_all_teams.php?l=`,
+    list_all_team_in_league_by_id: `${BASE_URL}lookup_all_teams.php?id=`,
     list_users_favorites: `${BASE_URL}searchloves.php?u=`,
   },
   lookUp: {
@@ -61,3 +62,13 @@ export const apiPoint = {
     list_countries: `${BASE_URL}all_countries.php`,
   },
 };
+
+export const noneTeamBase = [
+  'Motorsport',
+  'Fighting',
+  'Golf',
+  'Tennis',
+  'Cycling',
+  'ESports',
+  'Darts',
+];

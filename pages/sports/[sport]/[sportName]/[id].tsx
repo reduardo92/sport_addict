@@ -16,7 +16,7 @@ import getData from '../../../../components/utility/getData';
 interface StyledProps {}
 
 const Styled = styled.section<StyledProps>`
-  overflow: hidden;
+  /* overflow: hidden; */
   .sport--main {
     background-color: var(--clr-third);
     /* min-height: 100vh; */
@@ -48,14 +48,18 @@ const sport: React.FC<sportProps> = ({
   lastEvents,
 }) => {
   const { query } = useRouter();
-  console.log(league, 'from sport');
 
   return (
     <Styled className={`${query.sport}--section sport--section`}>
       <HeroSport banner={league.strBanner} leagueName={league.strLeague} />
       <div className='sport--main columns'>
         <MainContent league={league} seasons={season} teams={teams} />
-        <FixterContent nextEvents={nextEvents} lastEvents={lastEvents} />
+        <FixterContent
+          nextEvents={nextEvents}
+          lastEvents={lastEvents}
+          teams={teams}
+          sportType={league.strSport}
+        />
         <FactsContent data={league} />
       </div>
     </Styled>
@@ -69,7 +73,7 @@ export const getServerSideProps: GetServerSideProps<sportProps> = async ({
 }) => {
   const {
     lookUp: { lookUp_league_id },
-    list: { list_seasons_in_league, list_all_team_in_league },
+    list: { list_seasons_in_league, list_all_team_in_league_by_id },
     schedules: { schedules_next_league, schedules_last_league },
   } = apiPoint;
 
@@ -92,18 +96,15 @@ export const getServerSideProps: GetServerSideProps<sportProps> = async ({
     schedules_last_league + params?.id
   );
 
-  // Join Sport
-  const sport: any = params && [params.sportName];
-
   // Get Leagues Teams
   const { teams: teams }: { teams: Team[] } = await getData(
-    list_all_team_in_league + sport[0].split(' ').join('%20')
+    list_all_team_in_league_by_id + params?.id
   );
 
   return {
     props: {
       league: Object.values(league)[0],
-      season: Object.values(season),
+      season: season ? Object.values(season) : [],
       teams: Object.values(teams),
       nextEvents: Object.values(nextEvents)[0],
       lastEvents: Object.values(lastEvents)[0],

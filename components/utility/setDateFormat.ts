@@ -1,4 +1,5 @@
 export default (date: string) => {
+  if (!date) return;
   const months = [
     'Jan',
     'Feb',

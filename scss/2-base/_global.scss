@@ -20,10 +20,6 @@ html {
 
 body {
   height: 100%;
-  overflow-x: hidden;
-}
-
-main {
   // overflow-x: hidden;
 }
 
@@ -33,15 +29,9 @@ p {
   color: var(--clr-grey);
 }
 
-// h1 {
-//   font-size: var(--fs-h1) !important;
-// }
-// h2 {
-//   font-size: var(--fs-h2) !important;
-// }
-// h3 {
-//   font-size: var(--fs-h3) !important;
-// }
+#__next {
+  overflow-x: hidden;
+}
 
 .section {
   padding: 5em 1em;
@@ -107,7 +97,7 @@ p {
     right: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: -1;
   }
 }
@@ -125,7 +115,9 @@ p {
     height: 100%;
     width: 100%;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url('/imgs/soccer_stadium.jpg') no-repeat center center;
+      url('/imgs/soccer_stadium.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
     clip-path: polygon(27% -5%, 94% 0%, 75% 103%, -3% 149%);
     /* clip-path: polygon(39% 0, 83% 0, 65% 100%, 18% 100%);
     -webkit-clip-path: polygon(39% 0, 83% 0, 65% 100%, 18% 100%); */
@@ -134,6 +126,25 @@ p {
 }
 .reverse::before {
   transform: skewX(10deg);
+}
+
+.parallelogram--bg--grey {
+  position: relative;
+  z-index: 1;
+  &::before {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--clr-third);
+    clip-path: polygon(27% -5%, 94% 0%, 75% 103%, -3% 149%);
+    /* clip-path: polygon(39% 0, 83% 0, 65% 100%, 18% 100%);
+    -webkit-clip-path: polygon(39% 0, 83% 0, 65% 100%, 18% 100%); */
+    background-size: cover;
+  }
 }
 
 // Loading Bar Color
@@ -157,7 +168,13 @@ p {
 .gridMinMax {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  padding-top: 2em;
   & > div {
     grid-column: 2 / 2;
   }
+}
+
+.stickyColum {
+  position: sticky;
+  top: -50px;
 }

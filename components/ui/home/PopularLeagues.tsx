@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import Title from '../Title';
-import SimpleFlex from '../SimpleFlex';
 import { Leagues } from '../../interfaces/legues';
-import Link from 'next/link';
 import Badge from '../Badge';
+import SimpleFlex from '../SimpleFlex';
+import Title from '../Title';
+import { mediaSizes } from '../variables/variables';
 const Styled = styled.section`
   /* background-color: var(--clr-second); */
   background: url('/imgs/black_bg.jpg') no-repeat center center;
@@ -15,6 +15,18 @@ const Styled = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  & > :last-child {
+    & img {
+      pointer-events: none;
+    }
+  }
+
+  @media screen and (min-width: ${mediaSizes.table}) {
+    & > :last-child {
+      width: auto;
+    }
+  }
 `;
 
 interface PopularLeaguesProps {
@@ -33,6 +45,7 @@ export default ({ leagues }: PopularLeaguesProps) => {
             as={`/sports/${strSport}/${strLeague}/${idLeague}`}
             title={strLeague}
             src={strBadge}
+            clr
           />
         ))}
       </SimpleFlex>

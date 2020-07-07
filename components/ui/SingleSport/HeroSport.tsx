@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Sport } from '../../interfaces/Sport';
 
 interface StyledProps {
   bannerHero: string;
@@ -9,7 +8,9 @@ interface StyledProps {
 const Styled = styled.section<StyledProps>`
   .banner--hero {
     min-height: 15vh;
-    background: url(${({ bannerHero }) => bannerHero}) no-repeat;
+    background: url(${({ bannerHero }) =>
+        bannerHero ? bannerHero : '/imgs/grass.jpg'})
+      no-repeat;
     background-size: cover;
     background-position: center;
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Btn from './Btn';
+import { mediaSizes } from './variables/variables';
 
 const Styled = styled.section`
   position: relative;
@@ -11,7 +12,6 @@ const Styled = styled.section`
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.7);
 
   .video--bg,
   .bg--mobile {
@@ -27,7 +27,7 @@ const Styled = styled.section`
     background-color: black;
   }
 
-  .content {
+  .content--text {
     display: flex;
     flex-direction: column;
     align-items: baseline;
@@ -46,6 +46,7 @@ const Styled = styled.section`
       letter-spacing: 3px;
       text-shadow: var(--text-shadow);
       font-weight: var(--fw-bold);
+      margin-bottom: 0.5em;
       span {
         display: block;
         font-size: 9vw;
@@ -55,25 +56,57 @@ const Styled = styled.section`
 
     &__subtitle {
       font-size: var(--fs-small);
+      margin-bottom: 0.2em;
+    }
+  }
+
+  /* 992px */
+  @media screen and (min-width: ${mediaSizes.table_lg}) {
+    .container {
+      margin-top: 5em;
+    }
+
+    .content--text {
+      & .btn {
+        font-size: 1.5rem;
+        svg {
+          font-size: 1.6rem;
+        }
+      }
+    }
+
+    .box {
+      &__title {
+        font-size: 2.8rem;
+        span {
+          font-size: 4.5rem;
+        }
+      }
+
+      &__subtitle {
+        font-size: 1.2rem;
+      }
     }
   }
 `;
 
 const VideoHero = () => (
   <Styled className='hero--video'>
-    <div className='content'>
-      <div className='box'>
-        <h1 className='box__title'>
-          welcome to <span>sport addict</span>
-        </h1>
-        <p className='box__subtitle'>
-          Search for your favorite team,legues,players, and lots more
-        </p>
-        <p className='box__subtitle'>
-          Sign up and customize your own favorite lists{' '}
-        </p>
+    <div className='container'>
+      <div className='content--text'>
+        <div className='box'>
+          <h1 className='box__title'>
+            welcome to <span>sport addict</span>
+          </h1>
+          <p className='box__subtitle'>
+            Search for your favorite team,legues,players, and lots more
+          </p>
+          <p className='box__subtitle'>
+            Sign up and customize your own favorite lists{' '}
+          </p>
+        </div>
+        <Btn href='/signup' title='sign up' />
       </div>
-      <Btn href='/signup' title='sign up' />
     </div>
     <video autoPlay muted loop className='video--bg'>
       <source src='/bg_video.mp4' type='video/mp4' />

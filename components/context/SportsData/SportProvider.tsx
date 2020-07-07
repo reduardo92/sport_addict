@@ -37,7 +37,7 @@ const SportProvider = ({ children }: any) => {
     setData(SET_LEAGUES_DATA, data[1]);
   }, [data]);
 
-  console.log(state);
+  // console.log(state);
   return (
     <SportContext.Provider
       value={{ ...state, setData, clearData, setModalImg }}

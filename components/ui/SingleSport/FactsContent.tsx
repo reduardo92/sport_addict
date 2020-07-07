@@ -40,8 +40,13 @@ interface FactsContentProps {
 }
 
 const FactsContent: React.FC<FactsContentProps> = ({ data }) => {
+  console.log(data);
   const getYearsOld = () =>
-    new Date().getFullYear() - parseInt(data.intFormedYear);
+    data.intFormedYear === '0'
+      ? 'Note Available'
+      : `${data.intFormedYear} (${
+          new Date().getFullYear() - parseInt(data.intFormedYear)
+        }) years old`;
 
   return (
     <Styled className='facts--content column gridMinMax'>
@@ -63,13 +68,17 @@ const FactsContent: React.FC<FactsContentProps> = ({ data }) => {
       </div>
       <div className='facts fact--text'>
         <Paragraph text='Established' clr />
-        <Paragraph
-          text={`${data.intFormedYear} (${getYearsOld()} years old)`}
-        />
+        <Paragraph text={getYearsOld()} />
       </div>
       <div className='facts fact--text'>
         <Paragraph text='First Recorded Event' clr />
-        <Paragraph text={setDateFormat(data.dateFirstEvent)} />
+        <Paragraph
+          text={
+            data.dateFirstEvent !== '0000-00-00'
+              ? setDateFormat(data.dateFirstEvent)
+              : 'Not Found'
+          }
+        />
       </div>
       <div className='facts fact--text'>
         <Paragraph text='Current Season' clr />
@@ -87,10 +96,12 @@ const FactsContent: React.FC<FactsContentProps> = ({ data }) => {
         <Paragraph text='Sport Gender' clr />
         <Paragraph text={data.strGender} />
       </div>
-      <div className='facts fact--text'>
-        <Paragraph text='Alternate Namesn' clr />
-        <Paragraph text={data.strLeagueAlternate} />
-      </div>
+      {data.strLeagueAlternate && (
+        <div className='facts fact--text'>
+          <Paragraph text='Alternate Namesn' clr />
+          <Paragraph text={data.strLeagueAlternate} />
+        </div>
+      )}
     </Styled>
   );
 };
