@@ -7,6 +7,7 @@ import FixtureTab from '../FixtureTab';
 import ImgColum from '../ImgColum';
 import NoneTeamEvent from '../NoneTeamEvent';
 import SideStrips from '../StyleComponents/Styless/SideStrips';
+import { mediaSizes } from '../variables/variables';
 
 interface StyledProps {
   clipBG?: string;
@@ -30,9 +31,7 @@ const Styled = styled.section<StyledProps>`
   }
 
   & .fixters {
-    .title {
-      margin-left: 3.3em;
-    }
+    text-align: center;
   }
 
   .team--icons {
@@ -66,6 +65,39 @@ const Styled = styled.section<StyledProps>`
     text-align: center;
     .event--thumbnail {
       max-width: 15em;
+    }
+  }
+
+  @media screen and (max-width: ${mediaSizes.table_lg}) {
+    grid-template-columns: 1.2em auto 1.2em;
+
+    .team--icons {
+      .image {
+        max-width: 120px;
+      }
+      & > :last-child {
+        margin-top: -8em;
+        margin-left: 6.1em;
+      }
+    }
+  }
+
+  @media screen and (min-width: ${mediaSizes.table_lg}) {
+    & .fixters {
+      .date .date--link {
+        font-size: 1rem;
+      }
+
+      .stats {
+        font-size: 0.85rem;
+      }
+
+      .team {
+        max-width: 90px;
+        .para {
+          font-size: 0.8rem;
+        }
+      }
     }
   }
 `;

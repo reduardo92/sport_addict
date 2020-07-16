@@ -36,7 +36,7 @@ const Styled = styled.section`
   }
 
   & .stickyColum .columns {
-    display: flex;
+    /* display: flex; */
   }
   @media screen and (min-width: ${mediaSizes.table}) {
     & .fanart .columns {
@@ -87,7 +87,11 @@ const MainContent: React.FC<MainContentProps> = ({
           (art: string) => art && <ImgColum key={art} item={art} isColumn />
         )}
       </ColumsSection>
-      <ColumsSection title='teams' className='stickyColum'>
+      <ColumsSection
+        title='teams'
+        className='stickyColum'
+        divClass='columns is-mobile'
+      >
         {teams?.map(({ strTeam, strTeamBadge, idTeam }) => (
           <Badge
             key={idTeam}
@@ -95,8 +99,9 @@ const MainContent: React.FC<MainContentProps> = ({
             as={`/team/${strTeam}/${idTeam}`}
             title={strTeam}
             src={strTeamBadge}
-            className='column is-2'
+            className='column is-3'
             clr
+            setScroll
           />
         ))}
       </ColumsSection>

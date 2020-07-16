@@ -100,6 +100,7 @@ const Styled = styled.section<styledProps>`
 
       .side--image {
           clip-path: none;
+          min-height: 400px;
         }
 
       

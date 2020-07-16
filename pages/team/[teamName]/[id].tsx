@@ -82,6 +82,8 @@ const teamPage: React.FC<TeamProps> = ({ team, nextEvents, lastEvents }) => {
         subtitle={team.strStadiumDescription || 'Not Available'}
         sideBg={team.strStadiumThumb}
         btnHide
+        isSideBlack
+        isMirror
       />
       <div className='team--fanArt'>
         <ColumsSection title='fanart' className='fanart container'>

@@ -8,6 +8,7 @@ import SocialLinks from './SocialLinks';
 import Bio from './StyleComponents/Styless/Bio';
 import SideImg from './StyleComponents/Styless/SideImg';
 import SideStrips from './StyleComponents/Styless/SideStrips';
+import { mediaSizes } from './variables/variables';
 
 interface styledProps {
   bgClr?: boolean;
@@ -25,7 +26,7 @@ const Styled = styled.section<styledProps>`
     .head {
       display: flex;
       align-items: center;
-
+      flex-wrap: wrap;
       .title {
         margin-right: 5%;
         margin-bottom: 0;
@@ -47,6 +48,23 @@ const Styled = styled.section<styledProps>`
     }
     & .bio--text {
       max-width: 75em;
+    }
+  }
+
+  @media screen and (max-width: ${mediaSizes.table}) {
+    grid-template-columns: 1fr;
+
+    & > :first-child,
+    & > :last-child {
+      display: none;
+    }
+
+    .contentt {
+      .head {
+        .title {
+          margin-bottom: 1em;
+        }
+      }
     }
   }
 `;

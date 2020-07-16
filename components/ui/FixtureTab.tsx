@@ -1,14 +1,19 @@
 import Link from 'next/link';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import EventsProps from '../interfaces/Events';
 import { Team } from '../interfaces/Team';
 import setDateFormat from '../utility/setDateFormat';
 import setTimeTo12Format from '../utility/setTimeTo12Format';
 import Badge from './Badge';
 import NoBadge from './NoBadge';
+import { mediaSizes } from './variables/variables';
 
-const Styled = styled.div`
+interface StyledProps {
+  isTeamSection?: boolean;
+}
+
+const Styled = styled.div<StyledProps>`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 2em;
@@ -53,17 +58,30 @@ const Styled = styled.div`
     background-color: var(--clr-primary);
     color: var(--clr-third);
   }
+
+  ${({ isTeamSection }) =>
+    isTeamSection &&
+    css`
+      @media screen and (min-width: ${mediaSizes.table_lg}) {
+      }
+    `}
 `;
 
 interface FixtureTabProps {
   item: EventsProps;
   team: Team[] | any;
   isNext?: boolean;
+  isTeamSection?: boolean;
 }
 
-const FixtureTab: React.FC<FixtureTabProps> = ({ item, team, isNext }) => {
+const FixtureTab: React.FC<FixtureTabProps> = ({
+  item,
+  team,
+  isNext,
+  isTeamSection,
+}) => {
   return (
-    <Styled className='fixture'>
+    <Styled className='fixture' isTeamSection={isTeamSection}>
       <div className='date'>
         <Link
           href='/event/[eventName]/[eventId]'

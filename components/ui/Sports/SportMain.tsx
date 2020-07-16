@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import SimpleFlex from '../SimpleFlex';
+import SportContext from '../../context/SportsData/SportContext';
 import { AllSports } from '../../interfaces/AllSports';
+import { keyProps } from '../../interfaces/Key';
 import { Leagues } from '../../interfaces/legues';
 import Badge from '../Badge';
-import GridAuto from '../GridAuto';
-import SportContext from '../../context/SportsData/SportContext';
-import { keyProps } from '../../interfaces/Key';
+import SimpleFlex from '../SimpleFlex';
 import SportsLayout from './SportsLayout';
 
 const Styled = styled.section`
@@ -20,6 +19,10 @@ const Styled = styled.section`
     border-radius: 10px;
     border-bottom: 3px solid var(--clr-grey);
     margin-bottom: 3em;
+  }
+
+  & > :last-child {
+    flex-wrap: wrap;
   }
 `;
 
@@ -37,7 +40,7 @@ const SportMain: React.FC<SportMainProps> = ({
   return (
     <Styled className='parallelogram--bg reverse'>
       <h2 className='title is-4'>search by sport</h2>
-      <SimpleFlex setWidth='60px' className='sports--bar'>
+      <SimpleFlex setWidth='60px' className='sports--bar container'>
         {allSports?.map(
           ({ strSport, idSport }: AllSports) =>
             strSport !== 'Snooker' && (
@@ -60,7 +63,7 @@ const SportMain: React.FC<SportMainProps> = ({
       )}
       {!sportsByQuery && (
         <>
-          <GridAuto className='container' setWidth='80%'>
+          <div className='container columns is-mobile'>
             {randomsSports.map(
               ({ idLeague, strLeague, strSport, strBadge }) => (
                 <Badge
@@ -70,11 +73,12 @@ const SportMain: React.FC<SportMainProps> = ({
                   title={strLeague}
                   src={strBadge}
                   clr
-                  // onload
+                  setScroll
+                  className='column is-3'
                 />
               )
             )}
-          </GridAuto>
+          </div>
         </>
       )}
     </Styled>

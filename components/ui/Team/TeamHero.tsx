@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import ImgColum from '../ImgColum';
+import { mediaSizes } from '../variables/variables';
 
 interface StyledProps {
   bannerHero: string;
@@ -28,9 +29,14 @@ const Styled = styled.section<StyledProps>`
   & .content {
     padding: 1em;
     text-align: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+
     .title {
       font-size: 3.5rem;
       letter-spacing: 2px;
+      grid-column: 1 / -1;
     }
 
     .image {
@@ -39,6 +45,17 @@ const Styled = styled.section<StyledProps>`
       max-width: 150px;
       margin: 0 1em;
       filter: drop-shadow(2px 4px 1px black);
+    }
+  }
+
+  @media screen and (max-width: ${mediaSizes.table}) {
+    & .content {
+      .title {
+        font-size: 2rem;
+      }
+      .image {
+        max-width: 120px;
+      }
     }
   }
 `;

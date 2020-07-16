@@ -1,8 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { keyProps } from '../../interfaces/Key';
 import { Leagues } from '../../interfaces/legues';
-import GridAuto from '../GridAuto';
 import Badge from '../Badge';
 
 interface SportsLayoutProps {
@@ -20,34 +18,30 @@ const SportsLayout: React.FC<SportsLayoutProps> = ({ data }) => {
   return (
     <>
       {Object.entries(data).map(([key, value]) => (
-        <GridAuto
-          key={key}
-          className='container'
-          setWidth='80%'
-          style={{ marginBottom: '5em' }}
-        >
+        <div className='container' key={key} style={{ marginBottom: '5em' }}>
           <h2
             className='title is-5'
             style={{
-              gridColumn: '1 / -1',
-              marginBottom: '0',
-              justifySelf: 'flex-start',
+              width: 'max-content',
             }}
           >
             {keyTitle(key)}
           </h2>
-          {value.map(({ idLeague, strLeague, strSport, strBadge }) => (
-            <Badge
-              key={idLeague}
-              href='/sports/[sport]/[sportName]/[id]'
-              as={`/sports/${strSport}/${strLeague}/${idLeague}`}
-              src={strBadge}
-              title={strLeague}
-              clr
-              // onload
-            />
-          ))}
-        </GridAuto>
+          <div className='columns is-mobile' style={{ flexWrap: 'wrap' }}>
+            {value.map(({ idLeague, strLeague, strSport, strBadge }) => (
+              <Badge
+                key={idLeague}
+                href='/sports/[sport]/[sportName]/[id]'
+                as={`/sports/${strSport}/${strLeague}/${idLeague}`}
+                src={strBadge}
+                title={strLeague}
+                clr
+                setScroll
+                className='column is-2'
+              />
+            ))}
+          </div>
+        </div>
       ))}
     </>
   );
