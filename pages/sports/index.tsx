@@ -1,22 +1,32 @@
-import React from 'react';
-import getData from '../../components/utility/getData';
 import { GetServerSideProps } from 'next';
+import React from 'react';
+import { apiPoint } from '../../components/context/types';
+import { AllSports } from '../../components/interfaces/AllSports';
+import { keyProps } from '../../components/interfaces/Key';
 import { Leagues } from '../../components/interfaces/legues';
 import SportHero from '../../components/ui/Sports/SportHero';
 import SportMain from '../../components/ui/Sports/SportMain';
-import { apiPoint } from '../../components/context/types';
-import { keyProps } from '../../components/interfaces/Key';
+import getData from '../../components/utility/getData';
 
 interface SportsProps {
   randomsSports: Leagues[];
   sportsByQuery: keyProps<Leagues[]>;
+  sports: AllSports[];
 }
 
-const Sports: React.FC<SportsProps> = ({ sportsByQuery, randomsSports }) => {
+const Sports: React.FC<SportsProps> = ({
+  sportsByQuery,
+  randomsSports,
+  sports,
+}) => {
   return (
     <>
       <SportHero />
-      <SportMain sportsByQuery={sportsByQuery} randomsSports={randomsSports} />
+      <SportMain
+        sportsByQuery={sportsByQuery}
+        randomsSports={randomsSports}
+        sports={sports}
+      />
     </>
   );
 };
@@ -27,7 +37,7 @@ export const getServerSideProps: GetServerSideProps<SportsProps> = async ({
   query,
 }) => {
   const {
-    no_param: { list_leagues },
+    no_param: { list_leagues, list_sports },
     lookUp: { lookUp_league_id },
   } = apiPoint;
 
@@ -36,7 +46,7 @@ export const getServerSideProps: GetServerSideProps<SportsProps> = async ({
 
   const filter_Sports_by_query = async () => {
     if (!query.q) return null;
-    
+
     const leaguesRoutesArry: string[] = leagues
       .filter((league) => league.strSport === query.q)
       .map((item) => `${lookUp_league_id}${item.idLeague}`);
@@ -72,7 +82,10 @@ export const getServerSideProps: GetServerSideProps<SportsProps> = async ({
   // randomsSports
   const randomsSports: Leagues[] = await getRandoms();
 
+  // Get All Sports
+  const { sports }: { sports: AllSports[] } = await getData(list_sports);
+
   return {
-    props: { randomsSports, sportsByQuery },
+    props: { randomsSports, sportsByQuery, sports },
   };
 };

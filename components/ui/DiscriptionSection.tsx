@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { PlayerProps } from '../interfaces/PlayerProps';
 import { Team } from '../interfaces/Team';
 import FactContent from './FactContent';
+import FavoriteBtn from './FavoriteBtn';
 import Paragraph from './Paragraph';
 import SocialLinks from './SocialLinks';
 import Bio from './StyleComponents/Styless/Bio';
@@ -89,7 +90,7 @@ const DiscriptionSection: React.FC<DiscriptionSectionProps> = ({
     team?.strLeague4 || '',
     team?.strLeague5 || '',
     team?.strLeague6 || '',
-  ];
+  ].filter((item) => item !== '');
 
   return (
     <Styled className=''>
@@ -97,7 +98,10 @@ const DiscriptionSection: React.FC<DiscriptionSectionProps> = ({
       <div className='contentt'>
         <div className='head'>
           <h2 className='title subtitle'>DESCRIPTION</h2>
-          <SocialLinks data={team! || player!} />
+          <div className='icons--conntainer'>
+            <FavoriteBtn favItem={team!} id={team?.idTeam!} />
+            <SocialLinks data={team! || player!} />
+          </div>
         </div>
         <div className='facts--section'>
           {/* For Team */}
@@ -111,15 +115,12 @@ const DiscriptionSection: React.FC<DiscriptionSectionProps> = ({
               />
               <FactContent title='Stadium/Home' subTitle={team?.strStadium} />
               <FactContent title='Competitions'>
-                {competions.map(
-                  (i, index) =>
-                    i !== '' && (
-                      <span key={index} style={{ color: 'var(--clr-grey)' }}>
-                        {i}
-                        {competions.length !== index + 1 && ', '}
-                      </span>
-                    )
-                )}
+                {competions.map((i, index) => (
+                  <span key={index} style={{ color: 'var(--clr-grey)' }}>
+                    {i}
+                    {competions.length > index + 1 ? ', ' : ''}
+                  </span>
+                ))}
               </FactContent>
             </>
           )}

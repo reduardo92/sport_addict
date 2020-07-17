@@ -111,9 +111,10 @@ p {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
     height: 100%;
     width: 100%;
+    max-width: 1300px;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
       url('/imgs/soccer_stadium.jpg');
     background-repeat: no-repeat;
@@ -122,10 +123,11 @@ p {
     /* clip-path: polygon(39% 0, 83% 0, 65% 100%, 18% 100%);
     -webkit-clip-path: polygon(39% 0, 83% 0, 65% 100%, 18% 100%); */
     background-size: cover;
+    transform: translateX(-50%);
   }
 }
 .reverse::before {
-  transform: skewX(10deg);
+  transform: translateX(-50%) skewX(10deg);
 }
 
 .parallelogram--bg--grey {
@@ -136,14 +138,14 @@ p {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    max-width: 1300px;
     height: 100%;
     width: 100%;
     background: var(--clr-third);
     clip-path: polygon(27% -5%, 94% 0%, 75% 103%, -3% 149%);
-    /* clip-path: polygon(39% 0, 83% 0, 65% 100%, 18% 100%);
-    -webkit-clip-path: polygon(39% 0, 83% 0, 65% 100%, 18% 100%); */
     background-size: cover;
+    transform: translateX(-50%);
   }
 }
 
@@ -177,4 +179,35 @@ p {
 .stickyColum {
   position: sticky;
   top: -50px;
+}
+
+.icon--style {
+  margin-right: 1em;
+  color: var(--clr-white);
+  transition: var(--cubicbezier);
+  cursor: pointer;
+  border: 1.5px solid var(--clr-white);
+  border-radius: 50%;
+  display: flex;
+  padding: 0.4em;
+  font-size: 1rem;
+  background-color: transparent;
+
+  & svg:hover,
+  & svg:focus {
+    color: var(--clr-primary);
+    transform: scale(0.9);
+  }
+
+  &:hover,
+  &:focus {
+    border-color: var(--clr-primary);
+    color: var(--clr-primary);
+    transform: scale(0.9);
+  }
+}
+
+.icons--conntainer {
+  align-self: center;
+  display: flex;
 }

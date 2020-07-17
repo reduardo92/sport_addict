@@ -1,7 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
 import { keyProps } from '../../interfaces/Key';
 import { Leagues } from '../../interfaces/legues';
 import Badge from '../Badge';
+import { mediaSizes } from '../variables/variables';
+
+const Styled = styled.div`
+  @media screen and (max-width: ${mediaSizes.table}) {
+    & > :last-child {
+      justify-content: space-between;
+
+      .column.is-2 {
+        width: 30%;
+      }
+    }
+  }
+`;
 
 interface SportsLayoutProps {
   data: keyProps<Leagues[]>;
@@ -18,7 +32,7 @@ const SportsLayout: React.FC<SportsLayoutProps> = ({ data }) => {
   return (
     <>
       {Object.entries(data).map(([key, value]) => (
-        <div className='container' key={key} style={{ marginBottom: '5em' }}>
+        <Styled className='container' key={key} style={{ marginBottom: '5em' }}>
           <h2
             className='title is-5'
             style={{
@@ -41,7 +55,7 @@ const SportsLayout: React.FC<SportsLayoutProps> = ({ data }) => {
               />
             ))}
           </div>
-        </div>
+        </Styled>
       ))}
     </>
   );

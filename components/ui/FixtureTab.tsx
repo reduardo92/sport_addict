@@ -100,6 +100,7 @@ const FixtureTab: React.FC<FixtureTabProps> = ({
           src={team[0].strTeamBadge}
           className='home--team team'
           clr
+          setScroll
         />
       ) : (
         <NoBadge clr />
@@ -139,6 +140,7 @@ const FixtureTab: React.FC<FixtureTabProps> = ({
           src={team[1].strTeamBadge}
           className='away--team team'
           clr
+          setScroll
         />
       ) : (
         <NoBadge clr />

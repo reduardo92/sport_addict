@@ -62,4 +62,6 @@ export interface Team {
   strTwitter: string;
   strWebsite: string;
   strYoutube: string;
+  // for Sports
+  strBadge?: string;
 }

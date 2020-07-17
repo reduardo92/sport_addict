@@ -5,6 +5,7 @@ import { Sport } from '../../interfaces/Sport';
 import { Team } from '../../interfaces/Team';
 import Badge from '../Badge';
 import ColumsSection from '../ColumsSection';
+import FavoriteBtn from '../FavoriteBtn';
 import ImgColum from '../ImgColum';
 import SocialLinks from '../SocialLinks';
 import Bio from '../StyleComponents/Styless/Bio';
@@ -42,6 +43,15 @@ const Styled = styled.section`
     & .fanart .columns {
       display: flex;
     }
+
+    .section--description {
+      display: flex;
+      flex-wrap: wrap;
+
+      .title {
+        margin-bottom: 0;
+      }
+    }
   }
 `;
 
@@ -66,15 +76,12 @@ const MainContent: React.FC<MainContentProps> = ({
   // console.log(teams);
   return (
     <Styled className='mid--content column is-three-fifths'>
-      <div className='top--links'>
-        <p className='top--links--link'>Links</p>
-        <p>
-          Home/Sport/{league.strSport}/{league.strLeague}
-        </p>
-      </div>
       <div className='section--description'>
         <h2 className='title subtitle'>DESCRIPTION</h2>
-        <SocialLinks data={league} />
+        <div className='icons--conntainer'>
+          <FavoriteBtn favItem={league!} id={league.idLeague} />
+          <SocialLinks data={league} />
+        </div>
         <Bio bio={league.strDescriptionEN} />
       </div>
       <Seasons
