@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useRef } from 'react';
 import { FaUpload } from 'react-icons/fa';
+import { MdClear } from 'react-icons/md';
 import AlertContext from '../components/context/alert/AlertContext';
 import AuthContext from '../components/context/auth/AuthContext';
 import useFrom from '../components/Hooks/useForm';
@@ -76,6 +77,17 @@ const signup = () => {
     });
   };
 
+  const validateImage = (e: ChangeEvent<HTMLInputElement>) => {
+    const imgType = ['image/png', 'image/jpeg'];
+
+    if (!imgType.includes(e.target.files![0]['type'])) {
+      setAlert!('Invalid Image File', 'danger');
+      return;
+    }
+
+    setForm({ ...form, avatar: e.target.files![0] });
+  };
+  console.log(avatar);
   return (
     <FormSectionStyles className='sign--up'>
       <div className='side--content'>
@@ -151,8 +163,10 @@ const signup = () => {
                     id='avatar'
                     name='avatar'
                     className='file-input'
-                    onChange={(e) =>
-                      setForm({ ...form, avatar: e.target.files![0] })
+                    onChange={
+                      (e) => validateImage(e)
+                      // if (e.target.files![0].type === 'png')
+                      // setForm({ ...form, avatar: e.target.files![0] });
                     }
                     type='file'
                     aria-describedby='Avatar file upload'
@@ -163,8 +177,24 @@ const signup = () => {
                     </span>
                     <span className='file-label'>Choose a file…</span>
                   </span>
-                  <span className='file-name'>{avatar.name}</span>
+                  <span className='file-name'>
+                    {avatar !== '' && avatar.name}
+                  </span>
                 </label>
+                {avatar !== '' && (
+                  <span
+                    className='clear--file'
+                    onClick={() => setForm({ ...form, avatar: '' })}
+                    style={{
+                      marginLeft: '1em',
+                      display: 'flex',
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <MdClear />
+                  </span>
+                )}
               </div>
             </div>
 
