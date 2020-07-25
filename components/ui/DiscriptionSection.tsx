@@ -128,7 +128,7 @@ const DiscriptionSection: React.FC<DiscriptionSectionProps> = ({
         </div>
         <div className='Biography'>
           <Paragraph text='Biography' clr />
-          <Bio bio={team!.strDescriptionEN || player!.strDescriptionEN} />
+          <Bio bio={team!.strDescriptionEN || ''} />
         </div>
       </div>
       <SideStrips />

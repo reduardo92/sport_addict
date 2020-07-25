@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
+import setDateFormat from '../../utility/setDateFormat';
 import EventsProps from '../interfaces/Events';
-import setDateFormat from '../utility/setDateFormat';
 
 const Styled = styled.div`
   & + & {

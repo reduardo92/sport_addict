@@ -6,16 +6,12 @@ import {
   SET_MODAL_IMG,
   SET_SPORT_DATA,
 } from '../types';
+import { ReducerActionsProps } from './../../interfaces/ReducerProps';
 import { SportStateProps } from './SportContext';
-
-interface SportReducerActions {
-  type: string;
-  payload?: any;
-}
 
 const useSportReducer = (
   state: SportStateProps,
-  action: SportReducerActions
+  action: ReducerActionsProps
 ) => {
   switch (action.type) {
     // Set Search Data

@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import styled from 'styled-components';
 import SportContext from '../context/SportsData/SportContext';
+import { Leagues } from '../interfaces/legues';
 import { Sport } from '../interfaces/Sport';
 import { Team } from '../interfaces/Team';
 
 const Styled = styled.button``;
 
-interface FavoriteBtnProps {
-  favItem: Team | Sport;
+export interface FavoriteBtnProps {
+  favItem: Team | Sport | Leagues;
   id: string;
 }
 
@@ -30,7 +31,7 @@ const FavoriteBtn: React.FC<FavoriteBtnProps> = ({ favItem, id }) => {
     <>
       {!isAdd && (
         <Styled
-          onClick={() => addFavorite!(favItem)}
+          onClick={() => addFavorite!(favItem!)}
           className='icon--style'
           aria-label='Add To favorite'
           title='Add To Favorite'

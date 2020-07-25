@@ -23,6 +23,12 @@ body {
   // overflow-x: hidden;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
 p {
   font-family: var(--f-second);
   line-height: 1.6;
@@ -31,6 +37,9 @@ p {
 
 #__next {
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .section {

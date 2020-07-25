@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Styled = styled.footer`
   background-color: var(--clr-second);
+  flex-shrink: 0;
 
   .content {
     display: flex;

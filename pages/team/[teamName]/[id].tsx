@@ -12,7 +12,7 @@ import BannerImg from '../../../components/ui/StyleComponents/Styless/BannerImg'
 import TeamHero from '../../../components/ui/Team/TeamHero';
 import TeamScores from '../../../components/ui/Team/TeamScores';
 import TwoSlides from '../../../components/ui/TwoSides/TwoSlides';
-import getData from '../../../components/utility/getData';
+import getData from '../../../utility/getData';
 
 const Styled = styled.section`
   .team--fanArt {

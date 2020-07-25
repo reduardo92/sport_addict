@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import AuthContext from '../../context/auth/AuthContext';
 import ActiveLink from '../ActiveLink';
+import SearchButton from '../SearchButton';
+import UserIcon from '../UserIcon';
 import { mediaSizes } from '../variables/variables';
 import FavoriteBar from './FavoriteBar';
 
@@ -12,8 +15,11 @@ const Styled = styled.header`
     color: var(--clr-white);
   }
 
-  .navbar-burger span {
-    color: var(--clr-white);
+  .navbar-burger {
+    margin-left: 0;
+    span {
+      color: var(--clr-white);
+    }
   }
 
   .navbar-item,
@@ -28,6 +34,36 @@ const Styled = styled.header`
       color: var(--clr-primary);
       background-color: var(--clr-third);
       border-top-color: var(--clr-primary);
+    }
+  }
+
+  .navbar-brand {
+    .logo {
+      position: relative;
+      font-style: italic;
+
+      &::before {
+        content: '';
+        position: absolute;
+        height: 0.2rem;
+        width: 76%;
+        margin: 0 auto;
+        bottom: 38%;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        background-color: var(--clr-primary);
+      }
+    }
+
+    .userIcon,
+    .search--button {
+      align-self: center;
+    }
+
+    .search--button {
+      margin-left: auto;
+      margin-right: 1em;
     }
   }
 
@@ -49,10 +85,16 @@ const Styled = styled.header`
       }
     }
 
-    & > :first-child {
+    .sign-up {
       background-color: var(--clr-primary);
       border-color: var(--clr-primary);
       color: var(--clr-second);
+    }
+
+    /* Hide mobile Avatar & Search */
+    .userIcon,
+    .search--button {
+      display: none;
     }
   }
 
@@ -62,14 +104,62 @@ const Styled = styled.header`
 
   /* 992px */
   @media screen and (min-width: ${mediaSizes.table_lg}) {
-    .navbar-dropdown {
-      a.navbar-item {
-        color: var(--clr-second);
-
-        &:hover,
-        &:focus {
+    .has-dropdown {
+      &:hover {
+        .navbar-link {
           color: var(--clr-primary);
+          background-color: var(--clr-third);
+          border-top-color: var(--clr-primary);
         }
+      }
+
+      .navbar-dropdown {
+        padding-top: 0px;
+        padding-bottom: 0px;
+
+        a.navbar-item {
+          color: var(--clr-second);
+
+          &:hover,
+          &:focus {
+            color: var(--clr-primary);
+            background-color: var(--clr-third);
+          }
+        }
+      }
+    }
+
+    .navbar-brand {
+      .logo {
+        position: relative;
+        font-style: italic;
+
+        &::before {
+          content: '';
+          position: absolute;
+          height: 0.2rem;
+          width: 76%;
+          margin: 0 auto;
+          bottom: 38%;
+          left: 0;
+          right: 0;
+          z-index: -1;
+          background-color: var(--clr-primary);
+        }
+      }
+      .userIcon,
+      .search--button {
+        display: none;
+      }
+    }
+
+    .buttons {
+      .userIcon,
+      .search--button {
+        display: block;
+      }
+      .userIcon {
+        margin-left: 1em;
       }
     }
   }
@@ -77,14 +167,18 @@ const Styled = styled.header`
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
+  const { state } = useContext(AuthContext);
+
   return (
     <Styled className=''>
       <div className='container'>
         <nav className='navbar' role='navigation' aria-label='main navigation'>
           <div className='navbar-brand'>
             <ActiveLink href='/'>
-              <a className='navbar-item'>Sport Addict</a>
+              <a className='navbar-item logo'>Sport Addict</a>
             </ActiveLink>
+            <SearchButton />
+            {state.user && <UserIcon />}
 
             <a
               role='button'
@@ -173,10 +267,21 @@ const Navbar = () => {
 
             <div className='navbar-end'>
               <div className='buttons'>
-                <a className='button'>
-                  <strong>Sign up</strong>
-                </a>
-                <a className='button is-light'>Log in</a>
+                {state.user ? (
+                  <>
+                    <SearchButton />
+                    <UserIcon />
+                  </>
+                ) : (
+                  <>
+                    <ActiveLink href='/signup'>
+                      <a className='button sign-up'>Sign up</a>
+                    </ActiveLink>
+                    <ActiveLink href='/login'>
+                      <a className='button is-light'>Log in</a>
+                    </ActiveLink>
+                  </>
+                )}
               </div>
             </div>
           </div>

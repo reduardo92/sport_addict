@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { apiPoint } from '../../components/context/types';
 import { PlayerProps } from '../../components/interfaces/PlayerProps';
-import getData from '../../components/utility/getData';
+import getData from '../../utility/getData';
 
 const Styled = styled.section``;
 

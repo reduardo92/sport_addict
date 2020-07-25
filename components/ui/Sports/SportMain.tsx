@@ -96,20 +96,19 @@ const SportMain: React.FC<SportMainProps> = ({
       {!sportsByQuery && (
         <>
           <div className='container columns is-mobile'>
-            {randomsSports.map(
-              ({ idLeague, strLeague, strSport, strBadge }) => (
-                <Badge
-                  key={idLeague}
-                  href='/sports/[sport]/[sportName]/[id]'
-                  as={`/sports/${strSport}/${strLeague}/${idLeague}`}
-                  title={strLeague}
-                  src={strBadge}
-                  clr
-                  setScroll
-                  className='column is-2'
-                />
-              )
-            )}
+            {randomsSports.map((item) => (
+              <Badge
+                key={item.idLeague}
+                href='/sports/[sport]/[sportName]/[id]'
+                as={`/sports/${item.strSport}/${item.strLeague}/${item.idLeague}`}
+                title={item.strLeague}
+                src={item.strBadge}
+                clr
+                setScroll
+                className='column is-2'
+                isFavorite={{ favItem: item, id: item.idLeague }}
+              />
+            ))}
           </div>
         </>
       )}

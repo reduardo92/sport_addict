@@ -6,7 +6,7 @@ import { keyProps } from '../../components/interfaces/Key';
 import { Leagues } from '../../components/interfaces/legues';
 import SportHero from '../../components/ui/Sports/SportHero';
 import SportMain from '../../components/ui/Sports/SportMain';
-import getData from '../../components/utility/getData';
+import getData from '../../utility/getData';
 
 interface SportsProps {
   randomsSports: Leagues[];

@@ -11,9 +11,11 @@
     "deploy": "npm run build && npm run export"
   },
   "dependencies": {
+    "@types/uuid": "^8.0.0",
     "axios": "^0.19.2",
     "bulma": "^0.8.2",
     "dotenv": "^8.2.0",
+    "firebase": "^7.16.1",
     "next": "9.3.6",
     "nprogress": "^0.2.0",
     "react": "16.13.1",

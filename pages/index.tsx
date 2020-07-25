@@ -8,11 +8,10 @@ import MotoSports from '../components/ui/home/MotoSports';
 import PopularLeagues from '../components/ui/home/PopularLeagues';
 import TwoSlides from '../components/ui/TwoSides/TwoSlides';
 import VideoHero from '../components/ui/VideoHero';
-import getData from '../components/utility/getData';
+import getData from '../utility/getData';
 
 interface HomeProps {
   popularLeagues: Leagues[];
-  // allSports: AllSports[];
 }
 
 const Home: React.FC<HomeProps> = ({ popularLeagues }) => {
@@ -104,3 +103,30 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     props: { popularLeagues },
   };
 };
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const firebase: any = await loadFirebase();
+//   const db = firebase.firestore();
+//   const result = await new Promise((resolve, reject) => {
+//     db.collection('users')
+//       .get()
+//       .then((snapshot: any) => {
+//         let data: any = [];
+//         snapshot.forEach((doc: any) => {
+//           data.push(
+//             Object.assign({
+//               id: doc.id
+//             }, doc.data())
+//           )
+//         })
+//         resolve(data)
+//       })
+//     .catch((error: any) => reject([]))
+//   })
+
+//   return {
+//     props: {
+//       result
+//     }
+//   }
+// }

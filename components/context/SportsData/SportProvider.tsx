@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import { Leagues } from '../../interfaces/legues';
 import { Sport } from '../../interfaces/Sport';
 import { Team } from '../../interfaces/Team';
 import { ADD_FAVORITE, REMOVE_FAVORITE, SET_MODAL_IMG } from '../types';
@@ -20,7 +21,7 @@ const SportProvider = ({ children }: any) => {
     dispatch({ type: SET_MODAL_IMG, payload: src });
   };
 
-  const addFavorite = (obj: Sport | Team) => {
+  const addFavorite = (obj: Sport | Team | Leagues) => {
     dispatch({ type: ADD_FAVORITE, payload: obj });
   };
 

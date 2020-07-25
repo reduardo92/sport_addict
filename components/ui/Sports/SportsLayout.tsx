@@ -42,16 +42,17 @@ const SportsLayout: React.FC<SportsLayoutProps> = ({ data }) => {
             {keyTitle(key)}
           </h2>
           <div className='columns is-mobile' style={{ flexWrap: 'wrap' }}>
-            {value.map(({ idLeague, strLeague, strSport, strBadge }) => (
+            {value.map((item) => (
               <Badge
-                key={idLeague}
+                key={item.idLeague}
                 href='/sports/[sport]/[sportName]/[id]'
-                as={`/sports/${strSport}/${strLeague}/${idLeague}`}
-                src={strBadge}
-                title={strLeague}
+                as={`/sports/${item.strSport}/${item.strLeague}/${item.idLeague}`}
+                src={item.strBadge}
+                title={item.strLeague}
                 clr
                 setScroll
                 className='column is-2'
+                isFavorite={{ favItem: item, id: item.idLeague }}
               />
             ))}
           </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import setDateFormat from '../../../utility/setDateFormat';
 import { Sport } from '../../interfaces/Sport';
-import setDateFormat from '../../utility/setDateFormat';
 import ImgColum from '../ImgColum';
 import Paragraph from '../Paragraph';
 

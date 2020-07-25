@@ -99,16 +99,17 @@ const MainContent: React.FC<MainContentProps> = ({
         className='stickyColum'
         divClass='columns is-mobile'
       >
-        {teams?.map(({ strTeam, strTeamBadge, idTeam }) => (
+        {teams?.map((team) => (
           <Badge
-            key={idTeam}
+            key={team.idTeam}
             href='/team/[teamName]/[id]'
-            as={`/team/${strTeam}/${idTeam}`}
-            title={strTeam}
-            src={strTeamBadge}
+            as={`/team/${team.strTeam}/${team.idTeam}`}
+            title={team.strTeam}
+            src={team.strTeamBadge}
             className='column is-3'
             clr
             setScroll
+            isFavorite={{ favItem: team, id: team.idTeam }}
           />
         ))}
       </ColumsSection>

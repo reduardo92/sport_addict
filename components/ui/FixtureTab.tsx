@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
 import styled, { css } from 'styled-components';
+import setDateFormat from '../../utility/setDateFormat';
+import setTimeTo12Format from '../../utility/setTimeTo12Format';
 import EventsProps from '../interfaces/Events';
 import { Team } from '../interfaces/Team';
-import setDateFormat from '../utility/setDateFormat';
-import setTimeTo12Format from '../utility/setTimeTo12Format';
 import Badge from './Badge';
 import NoBadge from './NoBadge';
 import { mediaSizes } from './variables/variables';

@@ -11,7 +11,7 @@ import FactsContent from '../../../../components/ui/SingleSport/FactsContent';
 import FixterContent from '../../../../components/ui/SingleSport/FixterContent';
 import HeroSport from '../../../../components/ui/SingleSport/HeroSport';
 import MainContent from '../../../../components/ui/SingleSport/MainContent';
-import getData from '../../../../components/utility/getData';
+import getData from '../../../../utility/getData';
 
 interface StyledProps {}
 

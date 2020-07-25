@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import FindTeams from '../../../utility/FindTeams';
 import { noneTeamBase } from '../../context/types';
 import FixterPros from '../../interfaces/FixterProps';
-import FindTeams from '../../utility/FindTeams';
 import FixtureTab from '../FixtureTab';
 import NoneTeamEvent from '../NoneTeamEvent';
 

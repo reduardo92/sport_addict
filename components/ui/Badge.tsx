@@ -1,16 +1,20 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import styled, { css } from 'styled-components';
+import FavoriteBtn, { FavoriteBtnProps } from './FavoriteBtn';
 import Paragraph from './Paragraph';
-import Spinner from './StyleComponents/Styless/Spinner';
 
-const Styled = styled.a`
-  transition: var(--cubicbezier);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+const Styled = styled.div<{ isFavorite: boolean }>`
+  position: relative;
+
+  .link--tag {
+    transition: var(--cubicbezier);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 
   & > .para {
     width: fit-content;
@@ -22,6 +26,23 @@ const Styled = styled.a`
     filter: grayscale(0.8);
     opacity: 0.8;
   }
+
+  ${({ isFavorite }) =>
+    isFavorite &&
+    css`
+      & > :last-child {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        visibility: hidden;
+        transform: scale(0.3) rotate(200deg);
+        transition: transform 0.2s linear;
+      }
+      &:hover > :last-child {
+        visibility: visible;
+        transform: scale(1) rotate(0deg);
+      }
+    `}
 `;
 
 interface BadgeProps {
@@ -32,7 +53,7 @@ interface BadgeProps {
   className?: string;
   setScroll?: boolean;
   clr?: boolean;
-  onload?: boolean;
+  isFavorite?: FavoriteBtnProps;
 }
 
 const Badge: React.FC<BadgeProps> = ({
@@ -43,25 +64,29 @@ const Badge: React.FC<BadgeProps> = ({
   setScroll = false,
   className,
   clr,
-  onload = false,
+  isFavorite,
 }) => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
   return (
-    <Link href={href} as={as} scroll={setScroll}>
-      <Styled className={`link--tag ${className}`} title={title}>
-        {onload && !isLoaded && <Spinner />}
+    <Styled
+      className={`badge ${className}`}
+      title={title}
+      isFavorite={isFavorite ? true : false}
+    >
+      <Link href={href} as={as} scroll={setScroll}>
+        <a className='link--tag'>
+          <img
+            className='link--tag__img'
+            src={src || '/icons/notAvailable.png'}
+            alt={title}
+          />
+          <Paragraph text={title} clr={clr} />
+        </a>
+      </Link>
 
-        <img
-          onLoad={() => setIsLoaded(true)}
-          className='link--tag__img'
-          src={src || '/icons/notAvailable.png'}
-          alt={title}
-        />
-
-        <Paragraph text={title} clr={clr} />
-      </Styled>
-    </Link>
+      {isFavorite && (
+        <FavoriteBtn favItem={isFavorite.favItem} id={isFavorite.id} />
+      )}
+    </Styled>
   );
 };
 

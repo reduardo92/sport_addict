@@ -21,7 +21,7 @@ export interface SportStateProps {
   clearData?: (type: string) => void;
   setData?: (type: string, data: any) => any;
   setModalImg?: (src: string) => void;
-  addFavorite?: (obj: Sport | Team) => void;
+  addFavorite?: (obj: Sport | Team | Leagues) => void;
   removeFavorite?: (id: string) => void;
 }
 
