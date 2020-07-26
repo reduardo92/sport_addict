@@ -1,5 +1,3 @@
-export const API_KEY = process.env.API_KEY;
-export const SITE_URL = process.env.SITE_URL;
 export const BASE_URL = 'https://www.thesportsdb.com/api/v1/json/1/';
 export const IMG_URL =
   'https://www.thesportsdb.com/images/media/league/fanart/';

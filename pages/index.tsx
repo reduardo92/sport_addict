@@ -15,6 +15,7 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ popularLeagues }) => {
+  console.log(process.env.FIREBASE_API_KEY);
   return (
     <>
       <VideoHero />

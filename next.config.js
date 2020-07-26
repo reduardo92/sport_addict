@@ -2,7 +2,6 @@ require('dotenv').config();
 
 module.exports = {
   env: {
-    API_KEY: process.env.API_KEY,
     FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
     FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
     FIREBASE_DATABASE_URL: process.env.FIREBASE_DATABASE_URL,
