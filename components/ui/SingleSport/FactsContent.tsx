@@ -40,7 +40,6 @@ interface FactsContentProps {
 }
 
 const FactsContent: React.FC<FactsContentProps> = ({ data }) => {
-  console.log(data);
   const getYearsOld = () =>
     data.intFormedYear === '0'
       ? 'Note Available'

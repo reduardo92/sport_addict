@@ -5,8 +5,10 @@ export const IMG_URL =
 // DATA
 export const SET_SPORT_DATA = 'SET_SPORT_DATA';
 export const SET_LEAGUES_DATA = 'SET_LEAGUES_DATA';
+export const GET_FAVORITES = 'GET_FAVORITES';
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
+export const CLEAR_FAVORITES = 'CLEAR_FAVORITES';
 // Set MODAL
 export const SET_MODAL_IMG = 'SET_MODAL_IMG';
 export const CLEAR_MODAL_IMG = 'CLEAR_MODAL_IMG';

@@ -4,4 +4,7 @@ export interface Leagues {
   strLeague: string;
   strSport: string;
   strDivision?: any;
+  // Optional
+  strTeam?: string;
+  uid?: string;
 }

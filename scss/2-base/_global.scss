@@ -35,6 +35,10 @@ p {
   color: var(--clr-grey);
 }
 
+button {
+  cursor: pointer;
+}
+
 #__next {
   overflow-x: hidden;
   display: flex;

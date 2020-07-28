@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
-import styled from 'styled-components';
+import React, { useContext, useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
+import AuthContext from '../../context/auth/AuthContext';
 import SportContext from '../../context/SportsData/SportContext';
+import { CLEAR_FAVORITES } from '../../context/types';
 import Badge from '../Badge';
 import SimpleFlex from '../SimpleFlex';
 
-const Styled = styled.div<{ bgClr: string }>`
+const Styled = styled.div<{ bgClr: string; isDelete: boolean }>`
   width: 100%;
   padding: 0.5em;
   background-color: ${({ bgClr }) =>
@@ -36,6 +38,29 @@ const Styled = styled.div<{ bgClr: string }>`
     margin: 0 0.3em;
     animation: fadeIn 0.3s linear;
 
+    ${({ isDelete }) =>
+      isDelete &&
+      css`
+        &:hover,
+        &:focus {
+          .favorite--btn {
+            transform: translate(-50%, -50%);
+          }
+        }
+        .favorite--btn {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-color: var(--clr-second);
+          font-size: 0.75rem;
+          visibility: visible;
+
+          svg {
+            color: var(--clr-second);
+          }
+        }
+      `}
+
     @keyframes fadeIn {
       from {
         transform: translateY(50px);
@@ -52,20 +77,36 @@ interface FavoriteBarProps {
 }
 
 const FavoriteBar: React.FC<FavoriteBarProps> = () => {
+  const [isDelete, SetIsDelete] = useState<boolean>(false);
   const { pathname } = useRouter();
 
-  const { favorites } = useContext(SportContext);
+  const { favorites, getFavorites, clearData } = useContext(SportContext);
+  const {
+    state: { user },
+  } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!user) {
+      clearData!(CLEAR_FAVORITES);
+      return;
+    }
+    getFavorites!();
+  }, [user]);
 
   return (
-    <Styled className='favorite__bar' bgClr={pathname}>
+    <Styled className='favorite__bar' bgClr={pathname} isDelete={isDelete}>
       <div className='container'>
-        <button className='favorite__icon'>
-          <img src='/icons/favorite_Plus.svg' alt='favorite add icon' />
+        <button
+          style={isDelete ? { filter: 'invert(1)' } : {}}
+          className='favorite__icon'
+          onClick={() => SetIsDelete(!isDelete)}
+        >
+          <img src='/icons/favorite_remove.svg' alt='favorite remove icon' />
         </button>
         <SimpleFlex>
-          {favorites.map((item, i) => (
+          {favorites.map((item) => (
             <Badge
-              key={i}
+              key={item.uid}
               href={
                 item.idTeam
                   ? '/team/[teamName]/[id]'
@@ -80,6 +121,14 @@ const FavoriteBar: React.FC<FavoriteBarProps> = () => {
               src={item.strTeamBadge || item.strBadge}
               className='favorite__team'
               setScroll
+              isFavorite={
+                isDelete
+                  ? {
+                      favItem: item,
+                      id: item.idTeam ? item.idTeam : item.idLeague,
+                    }
+                  : undefined
+              }
             />
           ))}
         </SimpleFlex>

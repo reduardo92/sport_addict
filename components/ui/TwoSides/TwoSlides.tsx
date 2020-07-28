@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { topSoccer } from '../../interfaces/TopSoccer';
+import Badge from '../Badge';
 import Btn, { BtnProps } from '../Btn';
 import Paragraph from '../Paragraph';
 import SideStrips from '../StyleComponents/Styless/SideStrips';
@@ -183,16 +183,15 @@ const TwoSlides: React.FC<TwoSlidesProps> = ({
       }`}
     >
       {isSoccer &&
-        topSoccer.map(({ id, src, title }) => (
-          <Link
-            key={id}
+        topSoccer.map((team) => (
+          <Badge
+            key={team.idLeague}
             href='/sports/[sport]/[sportName]/[id]'
-            as={`/sports/soccer/${title}/${id}`}
-          >
-            <a className='link--tag' title={title}>
-              <img className='link--tag__img' src={src} alt={title} />
-            </a>
-          </Link>
+            as={`/sports/soccer/${team.strLeague}/${team.idLeague}`}
+            title=''
+            src={team.strBadge}
+            setScroll
+          />
         ))}
     </div>
   </Styled>

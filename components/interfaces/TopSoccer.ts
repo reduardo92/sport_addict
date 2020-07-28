@@ -1,20 +1,49 @@
-interface topSoccerProps {
-  id: string;
-  src: string;
-  title: string;
+export interface topSoccerProps {
+  idLeague: string;
+  strBadge: string;
+  strLeague: string;
+  //
 }
 
 export const topSoccer: topSoccerProps[] = [
-  { id: '4480', src: '/icons/chp.png', title: 'UEFA Champions League' },
-  { id: '4501', src: '/icons/liber.png', title: 'Copa Libertadores' },
   {
-    id: '4328',
-    src: '/icons/englishPrimer.png',
-    title: 'English Premier League',
+    idLeague: '4480',
+    strBadge: '/icons/chp.png',
+    strLeague: 'UEFA Champions League',
   },
-  { id: '4335', src: '/icons/liga.png', title: 'Spanish La Liga' },
-  { id: '4332', src: '/icons/italian.png', title: 'Italian Serie A' },
-  { id: '4331', src: '/icons/german.png', title: 'German Bundesliga' },
-  { id: '4350', src: '/icons/mex.png', title: 'Mexican Primera League' },
-  { id: '4346', src: '/icons/mls.png', title: 'American Major League Soccer' },
+  {
+    idLeague: '4501',
+    strBadge: '/icons/liber.png',
+    strLeague: 'Copa Libertadores',
+  },
+  {
+    idLeague: '4328',
+    strBadge: '/icons/englishPrimer.png',
+    strLeague: 'English Premier League',
+  },
+  {
+    idLeague: '4335',
+    strBadge: '/icons/liga.png',
+    strLeague: 'Spanish La Liga',
+  },
+  {
+    idLeague: '4332',
+    strBadge: '/icons/italian.png',
+    strLeague: 'Italian Serie A',
+  },
+  {
+    idLeague: '4331',
+    strBadge: '/icons/german.png',
+    strLeague: 'German Bundesliga',
+  },
+  {
+    idLeague: '4350',
+    strBadge: '/icons/mex.png',
+    strLeague: 'Mexican Primera League',
+  },
+  {
+    idLeague: '4346',
+    strBadge: '/icons/mls.png',
+    strLeague: 'American Major League Soccer',
+  },
 ];

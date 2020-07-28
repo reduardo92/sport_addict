@@ -1,5 +1,4 @@
 export interface Sport {
-  [key: string]: string;
   idLeague: string;
   strDivision: string;
   strCurrentSeason: string;
@@ -25,4 +24,6 @@ export interface Sport {
   idCup: string;
   intFormedYear: string;
   strLeagueAlternate: string;
+  strTeam?: string;
+  uid?: string;
 }

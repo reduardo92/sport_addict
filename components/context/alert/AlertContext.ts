@@ -7,11 +7,11 @@ export interface AlertProps {
 }
 
 export const alertInitialState: AlertStateProps = {
-  alerts: [],
+  alerts: null,
 };
 
 export interface AlertStateProps {
-  alerts: AlertProps[];
+  alerts: AlertProps | null;
   setAlert?: (msg: string, typeFor: string, timeout?: number) => void;
 }
 

@@ -20,12 +20,11 @@ const AlertMsg = () => {
   const { alerts } = useContext(AlertContext);
   return (
     <>
-      {alerts.length > 0 &&
-        alerts.map(({ id, typeFor, msg }) => (
-          <Styled key={id} className={`notification is-${typeFor}`}>
-            {msg}
-          </Styled>
-        ))}
+      {alerts && (
+        <Styled key={alerts.id} className={`notification is-${alerts.typeFor}`}>
+          {alerts.msg}
+        </Styled>
+      )}
     </>
   );
 };

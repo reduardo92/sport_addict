@@ -8,6 +8,7 @@ const SimpleFlex = styled.div<SimpleFlexProps>`
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
   width: 100%;
   -webkit-overflow-scrolling: touch;
   scroll-snap-points-x: repeat(

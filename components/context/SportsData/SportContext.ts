@@ -23,6 +23,7 @@ export interface SportStateProps {
   setModalImg?: (src: string) => void;
   addFavorite?: (obj: Sport | Team | Leagues) => void;
   removeFavorite?: (id: string) => void;
+  getFavorites?: () => void;
 }
 
 const SportContext = createContext<SportStateProps>(sportInitalState);

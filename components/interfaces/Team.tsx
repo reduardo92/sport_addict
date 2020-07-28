@@ -64,4 +64,5 @@ export interface Team {
   strYoutube: string;
   // for Sports
   strBadge?: string;
+  uid?: string;
 }

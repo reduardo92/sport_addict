@@ -1,6 +1,8 @@
 import {
   ADD_FAVORITE,
+  CLEAR_FAVORITES,
   CLEAR_MODAL_IMG,
+  GET_FAVORITES,
   REMOVE_FAVORITE,
   SET_LEAGUES_DATA,
   SET_MODAL_IMG,
@@ -25,6 +27,11 @@ const useSportReducer = (
         ...state,
         leagues: action.payload,
       };
+    case GET_FAVORITES:
+      return {
+        ...state,
+        favorites: [...action.payload],
+      };
     case ADD_FAVORITE:
       return {
         ...state,
@@ -34,8 +41,13 @@ const useSportReducer = (
       return {
         ...state,
         favorites: state.favorites?.filter(
-          (item) => (item.idTeam || item.idLeague) !== action.payload
+          (item) => item.uid !== action.payload
         ),
+      };
+    case CLEAR_FAVORITES:
+      return {
+        ...state,
+        favorites: [],
       };
     case SET_MODAL_IMG:
       return {

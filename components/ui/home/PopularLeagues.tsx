@@ -22,9 +22,16 @@ const Styled = styled.section`
     }
   }
 
+  & .favorite--btn {
+    top: -14px;
+    left: -19px;
+    font-size: 0.75rem;
+  }
+
   @media screen and (min-width: ${mediaSizes.table}) {
     & > :last-child {
       width: auto;
+      padding: 2em;
     }
   }
 `;
@@ -38,27 +45,19 @@ export default ({ leagues }: PopularLeaguesProps) => {
     <Styled className=''>
       <Title title='Popular Leagues' />
       <SimpleFlex setWidth='60px'>
-        {leagues?.map(({ idLeague, strBadge, strLeague, strSport }) => (
+        {leagues?.map((league) => (
           <Badge
-            key={idLeague}
+            key={league.idLeague}
             href='/sports/[sport]/[sportName]/[id]'
-            as={`/sports/${strSport}/${strLeague}/${idLeague}`}
-            title={strLeague}
-            src={strBadge}
+            as={`/sports/${league.strSport}/${league.strLeague}/${league.idLeague}`}
+            title={league.strLeague}
+            src={league.strBadge}
             clr
+            setScroll
+            isFavorite={{ favItem: league, id: league.idLeague }}
           />
         ))}
       </SimpleFlex>
     </Styled>
   );
 };
-
-// <Link
-// key={idLeague}
-// href='/sports/[sport]/[sportName]/[id]'
-// as={`/sports/${strSport}/${strLeague}/${idLeague}`}
-// >
-// <a className='link--tag' title={strLeague}>
-//   <img className='link--tag__img' src={strBadge} alt={strLeague} />
-// </a>
-// </Link>

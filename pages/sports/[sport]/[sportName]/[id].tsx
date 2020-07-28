@@ -16,10 +16,8 @@ import getData from '../../../../utility/getData';
 interface StyledProps {}
 
 const Styled = styled.section<StyledProps>`
-  /* overflow: hidden; */
   .sport--main {
     background-color: var(--clr-third);
-    /* min-height: 100vh; */
 
     & > :last-child {
       order: -1;
