@@ -89,38 +89,23 @@ const UserIcon: React.FC<UserIconProps> = ({}) => {
 
       <div className='dropdown-menu' id='dropdown-menu4' role='menu'>
         <div className='dropdown-content'>
-          <ActiveLink
-            href='/[user]/[id]'
-            as={`/${user?.displayName}/${user?.uid}`}
-          >
+          <ActiveLink href='/[user]' as={`/${user?.displayName}`}>
             <a className='dropdown-item user--name'>
               {user?.displayName}
               <span className='user--name__subtext'>View Profile</span>
             </a>
           </ActiveLink>
-          <ActiveLink
-            href='/[user]/[id]'
-            as={`/${user?.displayName}/${user?.uid}?q=leagues`}
-          >
+          <ActiveLink href='/[user]' as={`/${user?.displayName}?q=leagues`}>
             <a className='dropdown-item'>Leagues</a>
           </ActiveLink>
-          <ActiveLink
-            href='/[user]/[id]'
-            as={`/${user?.displayName}/${user?.uid}?q=teams`}
-          >
+          <ActiveLink href='/[user]' as={`/${user?.displayName}?q=teams`}>
             <a className='dropdown-item'>Teams</a>
           </ActiveLink>
-          <ActiveLink
-            href='/[user]/[id]'
-            as={`/${user?.displayName}/${user?.uid}?q=players`}
-          >
+          <ActiveLink href='/[user]' as={`/${user?.displayName}?q=players`}>
             <a className='dropdown-item'>Players</a>
           </ActiveLink>
           <hr className='dropdown-divider' />
-          <ActiveLink
-            href='/[user]/[id]'
-            as={`/${user?.displayName}/${user?.uid}?q=editprofile`}
-          >
+          <ActiveLink href='/[user]' as={`/${user?.displayName}?q=editprofile`}>
             <a className='dropdown-item'>Edit Profile</a>
           </ActiveLink>
           <hr className='dropdown-divider' />

@@ -59,6 +59,16 @@ const SportProvider = ({ children }: any) => {
     dispatch({ type: REMOVE_FAVORITE, payload: uid });
   };
 
+  // Search Data
+  const getSearchData = async (search: any) => {
+    console.log(search);
+    try {
+      // dispatch({ type: SET_SEARCH_DATA, payload: results });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   console.log(state);
   return (
     <SportContext.Provider
@@ -70,6 +80,7 @@ const SportProvider = ({ children }: any) => {
         addFavorite,
         removeFavorite,
         getFavorites,
+        getSearchData,
       }}
     >
       {children}

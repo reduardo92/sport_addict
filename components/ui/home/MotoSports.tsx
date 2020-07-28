@@ -41,16 +41,22 @@ const Styled = styled.section`
 
 const MotoSports: React.FC = () => (
   <Styled className='motosports columns '>
-    <Link href='/sport/[sportName]/[id]' as={`/sport/IndyCar-Series/${4373}`}>
+    <Link
+      href='/sports/[sport]/[sportName]/[id]'
+      as={`/sports/Motorsport/IndyCar-Series/${4373}`}
+    >
       <a title='Indycar Series' className='moto--link column'></a>
     </Link>
     <Link
-      href='/sport/[sportName]/[id]'
-      as={`/sport/NASCAR-Cup-Series/${4393}`}
+      href='/sports/[sport]/[sportName]/[id]'
+      as={`/sports/Motorsport/NASCAR-Cup-Series/${4393}`}
     >
       <a title='Nascar Cup Series' className='moto--link column'></a>
     </Link>
-    <Link href='/sport/[sportName]/[id]' as={`/sport/Formula-1/${4370}`}>
+    <Link
+      href='/sports/[sport]/[sportName]/[id]'
+      as={`/sports/Motorsport/Formula-1/${4370}`}
+    >
       <a title='Formula 1' className='moto--link column'></a>
     </Link>
   </Styled>

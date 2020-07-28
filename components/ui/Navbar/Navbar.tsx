@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AuthContext from '../../context/auth/AuthContext';
 import ActiveLink from '../ActiveLink';
 import SearchButton from '../SearchButton';
+import SearchFrom from '../SearchFrom';
 import UserIcon from '../UserIcon';
 import { mediaSizes } from '../variables/variables';
 import FavoriteBar from './FavoriteBar';
@@ -288,6 +289,7 @@ const Navbar = () => {
         </nav>
       </div>
       <FavoriteBar />
+      <SearchFrom />
     </Styled>
   );
 };

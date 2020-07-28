@@ -64,17 +64,6 @@ const FormSectionStyles = styled.section<FormSectionProps>`
 
   /* Icons */
   .control {
-    .icon {
-      height: 100%;
-      width: 1rem;
-    }
-
-    .is-left {
-      left: 10px !important;
-    }
-    .is-right {
-      right: 10px !important;
-    }
   }
 
   .cancel {

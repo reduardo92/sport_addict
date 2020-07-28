@@ -10,6 +10,7 @@ export const sportInitalState: SportStateProps = {
   leagues: null,
   modalImg: { isActive: false, src: '' },
   favorites: [],
+  searchData: null,
 };
 
 export interface SportStateProps {
@@ -18,12 +19,14 @@ export interface SportStateProps {
   leagues: Leagues[] | null;
   modalImg: { isActive: boolean; src: string };
   favorites: Team[] & Sport[];
+  searchData: null | [];
   clearData?: (type: string) => void;
   setData?: (type: string, data: any) => any;
   setModalImg?: (src: string) => void;
   addFavorite?: (obj: Sport | Team | Leagues) => void;
   removeFavorite?: (id: string) => void;
   getFavorites?: () => void;
+  getSearchData?: (search: any) => void;
 }
 
 const SportContext = createContext<SportStateProps>(sportInitalState);

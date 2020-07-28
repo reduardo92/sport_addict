@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import AuthContext from '../context/auth/AuthContext';
 import Btn from './Btn';
 import { mediaSizes } from './variables/variables';
 
@@ -90,29 +91,42 @@ const Styled = styled.section`
   }
 `;
 
-const VideoHero = () => (
-  <Styled className='hero--video'>
-    <div className='container'>
-      <div className='content--text'>
-        <div className='box'>
-          <h1 className='box__title'>
-            welcome to <span>sport addict</span>
-          </h1>
-          <p className='box__subtitle'>
-            Search for your favorite team,legues,players, and lots more
-          </p>
-          <p className='box__subtitle'>
-            Sign up and customize your own favorite lists{' '}
-          </p>
+const VideoHero = () => {
+  const {
+    state: { user },
+  } = useContext(AuthContext);
+  return (
+    <Styled className='hero--video'>
+      <div className='container'>
+        <div className='content--text'>
+          <div className='box'>
+            <h1 className='box__title'>
+              welcome to <span>sport addict</span>
+            </h1>
+            <p className='box__subtitle'>
+              Search for your favorite team,legues,players, and lots more
+            </p>
+            <p className='box__subtitle'>
+              Sign up and customize your own favorite lists{' '}
+            </p>
+          </div>
+          {user ? (
+            <Btn
+              href='/[user]'
+              as={`/${user.displayName}`}
+              title='View Profile'
+            />
+          ) : (
+            <Btn href='/signup' title='sign up' />
+          )}
         </div>
-        <Btn href='/signup' title='sign up' />
       </div>
-    </div>
-    <video autoPlay muted loop className='video--bg'>
-      <source src='/bg_video.mp4' type='video/mp4' />
-    </video>
-    {/* <div className='bg--mobile' /> */}
-  </Styled>
-);
+      <video autoPlay muted loop className='video--bg'>
+        <source src='/bg_video.mp4' type='video/mp4' />
+      </video>
+      {/* <div className='bg--mobile' /> */}
+    </Styled>
+  );
+};
 
 export default VideoHero;

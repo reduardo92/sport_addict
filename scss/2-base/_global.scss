@@ -224,3 +224,19 @@ button {
   align-self: center;
   display: flex;
 }
+
+// From control svgs
+
+.control {
+  .icon {
+    height: 100% !important;
+    width: 1rem !important;
+  }
+
+  .is-left {
+    left: 10px !important;
+  }
+  .is-right {
+    right: 10px !important;
+  }
+}
