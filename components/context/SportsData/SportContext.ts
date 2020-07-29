@@ -1,6 +1,8 @@
 import { createContext } from 'react';
 import { AllSports } from '../../interfaces/AllSports';
+import EventsProps from '../../interfaces/Events';
 import { Leagues } from '../../interfaces/legues';
+import { PlayerProps } from '../../interfaces/PlayerProps';
 import { Sport } from '../../interfaces/Sport';
 import { Team } from '../../interfaces/Team';
 
@@ -19,16 +21,18 @@ export interface SportStateProps {
   leagues: Leagues[] | null;
   modalImg: { isActive: boolean; src: string };
   favorites: Team[] & Sport[];
-  searchData: null | [];
+  searchData: null | searchProps[];
   clearData?: (type: string) => void;
   setData?: (type: string, data: any) => any;
   setModalImg?: (src: string) => void;
   addFavorite?: (obj: Sport | Team | Leagues) => void;
   removeFavorite?: (id: string) => void;
   getFavorites?: () => void;
-  getSearchData?: (search: any) => void;
+  getSearchData?: (search: string, option: string) => void;
 }
 
 const SportContext = createContext<SportStateProps>(sportInitalState);
 
 export default SportContext;
+
+interface searchProps extends Team, PlayerProps, EventsProps {}

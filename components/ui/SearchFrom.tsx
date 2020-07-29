@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import {
   ChangeEvent,
   FormEvent,
@@ -9,11 +8,11 @@ import {
   useState,
 } from 'react';
 import { BsSearch } from 'react-icons/bs';
-import { FaSocks } from 'react-icons/fa';
 import { MdClear } from 'react-icons/md';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import SportContext from '../context/SportsData/SportContext';
 import { CLEAR_SEARCH_DATA } from '../context/types';
+import FadeIn from './StyleComponents/keyFrames/FadeIn';
 
 const Styled = styled.div<{ isOption: boolean }>`
   background-color: var(--clr-white);
@@ -43,18 +42,29 @@ const Styled = styled.div<{ isOption: boolean }>`
       font-weight: var(--fw-bold);
       color: var(--clr-second);
       cursor: pointer;
-      background-color: var(--clr-second);
-      color: var(--clr-white);
-      border-radius: 0;
-      &:hover,
-      &:focus {
-        opacity: 0.9;
-      }
     }
+
+    &:hover,
+    &:focus {
+    }
+
+    ${({ isOption }) =>
+      isOption &&
+      css`
+        border-radius: 0;
+        background-color: var(--clr-second);
+        color: var(--clr-white);
+        border-radius: 0;
+        select {
+          background-color: var(--clr-second);
+          color: var(--clr-white);
+          border-radius: 0;
+        }
+      `}
   }
 
   .select:not(.is-multiple):not(.is-loading)::after {
-    border-color: var(--clr-white) !important;
+    border-color: var(--clr-third) !important;
   }
 
   .search--content {
@@ -76,14 +86,16 @@ const Styled = styled.div<{ isOption: boolean }>`
     padding: 0.1em 1em;
     transition: var(--ease--in--out--02s);
     cursor: pointer;
+    animation: ${FadeIn} 0.2s ease-in;
+
     &:hover {
       background-color: rgba(196, 196, 196, 0.4);
     }
 
     &__name {
-      color: var(--second-clr);
-      margin-bottom: 0;
-      margin-left: 1em;
+      margin: 0 0.5em 0 1em;
+      color: var(--clr-second);
+      font-weight: bold;
 
       .media--in {
         color: rgb(151, 151, 151);
@@ -99,7 +111,7 @@ const Styled = styled.div<{ isOption: boolean }>`
 
   .wrapper {
     margin: 0 auto;
-    max-width: 920px;
+    max-width: 71.31rem; /* 1141px; */
     display: flex;
     align-items: center;
     font-size: 0.9em;
@@ -110,11 +122,6 @@ const Styled = styled.div<{ isOption: boolean }>`
   @media screen and (min-width: 1000px) {
     .form {
       padding: 0;
-    }
-
-    .form--clear {
-      right: 2%;
-      transform: translate(-2%, -50%);
     }
   }
 `;
@@ -128,8 +135,6 @@ const SearchFrom: React.FC<SearchFromProps> = () => {
   const [optionFocus, setOptionFocus] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const router = useRouter();
-
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
   ) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -139,30 +144,26 @@ const SearchFrom: React.FC<SearchFromProps> = () => {
       clearData!(CLEAR_SEARCH_DATA);
       return;
     } else {
-      getSearchData!(form.search);
+      getSearchData!(form.search, form.option);
     }
   }, [form.search]);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (form.search === '') {
-      console.log('enter something');
-    } else {
-      console.log('loged', form.search);
-      router.push('/form.search/[query]', `/search/${form.search}`);
-    }
-    setForm({ search: '', option: 'team' });
-  };
 
   console.log(form);
   return (
     <Styled className='search form' isOption={optionFocus}>
-      <form className='search--form container' onSubmit={handleSubmit}>
+      <form
+        className='search--form container'
+        onSubmit={(e: FormEvent<HTMLFormElement>) => e.preventDefault()}
+      >
         <div className='field has-addons'>
           <p className='control '>
             <span className='select'>
-              <select onChange={handleChange} name={form.option}>
+              <select
+                onChange={handleChange}
+                name='option'
+                onFocus={() => setOptionFocus(true)}
+                onBlur={() => setOptionFocus(false)}
+              >
                 <option value='team'>Team</option>
                 <option value='player'>Palyer</option>
                 <option value='event'>Event</option>
@@ -179,7 +180,13 @@ const SearchFrom: React.FC<SearchFromProps> = () => {
               onChange={handleChange}
               onClick={() => setIsFocus(true)}
               onBlur={() => setTimeout(() => setIsFocus(false), 300)}
-              placeholder='Search for a movie, tv show, person...'
+              placeholder={`Search for a ${
+                form.option === 'team'
+                  ? 'team'
+                  : form.option === 'player'
+                  ? 'player'
+                  : 'event'
+              }...`}
             />
             <BsSearch className='logout--icon icon is-small is-left' />
           </div>
@@ -187,34 +194,70 @@ const SearchFrom: React.FC<SearchFromProps> = () => {
             <p className='control'>
               <MdClear
                 className='icon is-small is-right'
-                onClick={() => console.log('gelp')}
+                onClick={() => setForm({ ...form, search: '' })}
               />
             </p>
           )}
         </div>
       </form>
       <div className='search--content'>
-        {isFocus &&
-          searchData &&
-          searchData.map((item, i) => (
-            <Link key={i} href={`/`} as={`/`}>
-              <a className='search--tag' aria-label='hello'>
-                <div
-                  key={i}
-                  onClick={() => setForm({ search: '', option: 'team' })}
-                  className='search--content--item'
-                >
-                  <div className='wrapper'>
-                    <FaSocks />
-                    <p className='search--content--item__name'>
-                      hello
-                      <span className='media--in'>Team</span>
-                    </p>
+        <ul>
+          {searchData?.map((item, i) => (
+            <li key={i}>
+              <Link
+                key={i}
+                href={
+                  item.idPlayer
+                    ? '/player/[playerName]'
+                    : item.idEvent
+                    ? '/events/[eventSport]/[eventName]/[id]'
+                    : '/team/[teamName]/[id]'
+                }
+                as={
+                  item.idPlayer
+                    ? `/player/${item.strPlayer}`
+                    : item.idEvent
+                    ? `/events/${item.strSport}/${item.strEvent}/${item.idEvent}`
+                    : `/team/${item.strTeam}/${item.idTeam}`
+                }
+              >
+                <a className='search--tag' aria-label='hello'>
+                  <div
+                    onClick={() => setForm({ search: '', option: 'team' })}
+                    className='search--content--item'
+                  >
+                    <div className='wrapper'>
+                      <figure className='image is-48x48'>
+                        <img
+                          className='is-rounded'
+                          src={
+                            item.strCutout ||
+                            item.strThumb ||
+                            item.strTeamBadge ||
+                            '/icons/noBadge.png'
+                          }
+                        />
+                      </figure>
+                      <p className='search--content--item__name'>
+                        {item.idPlayer
+                          ? item.strPlayer
+                          : item.idEvent
+                          ? item.strEvent
+                          : item.strTeam}
+                      </p>
+                      <figure className='media--in image is-16x16'>
+                        <img
+                          className='is-rounded'
+                          src={`/icons/${item.strSport.replace(' ', '_')}.png`}
+                        />
+                      </figure>
+                    </div>
                   </div>
-                </div>
-              </a>
-            </Link>
+                </a>
+              </Link>
+            </li>
           ))}
+        </ul>
       </div>
     </Styled>
   );

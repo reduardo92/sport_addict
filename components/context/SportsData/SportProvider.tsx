@@ -1,13 +1,17 @@
 import React, { useReducer } from 'react';
 import { auth, db } from '../../../LIB/db';
+import getData from '../../../utility/getData';
 import { Leagues } from '../../interfaces/legues';
 import { Sport } from '../../interfaces/Sport';
 import { Team } from '../../interfaces/Team';
 import {
   ADD_FAVORITE,
+  apiPoint,
+  CLEAR_SEARCH_DATA,
   GET_FAVORITES,
   REMOVE_FAVORITE,
   SET_MODAL_IMG,
+  SET_SEARCH_DATA,
 } from '../types';
 import SportContext, { sportInitalState } from './SportContext';
 import useSportReducer from './useSportReducer';
@@ -30,13 +34,13 @@ const SportProvider = ({ children }: any) => {
   const getFavorites = async () => {
     const userUid = auth.currentUser?.uid;
     try {
-      const data = await db.collection('favorites').get();
+      const data = await db
+        .collection('favorites')
+        .where('user_uid', '==', userUid)
+        .get();
       const favriotes: any = [];
       data.forEach((doc) => favriotes.push(doc.data()));
-      const userFavorites = favriotes
-        .filter((fav: any) => fav.user_uid === userUid)
-        .reverse();
-      dispatch({ type: GET_FAVORITES, payload: userFavorites });
+      dispatch({ type: GET_FAVORITES, payload: favriotes.reverse() });
     } catch (error) {
       console.log(error);
     }
@@ -60,12 +64,28 @@ const SportProvider = ({ children }: any) => {
   };
 
   // Search Data
-  const getSearchData = async (search: any) => {
-    console.log(search);
+  const getSearchData = async (search: string, option: string) => {
+    const {
+      search: { team_name, player_name, event_name },
+    } = apiPoint;
+
+    const types: {
+      [key: string]: string;
+      team: string;
+      player: string;
+      event: string;
+    } = {
+      team: team_name,
+      player: player_name,
+      event: event_name,
+    };
+
     try {
-      // dispatch({ type: SET_SEARCH_DATA, payload: results });
+      const data = await getData(types[option] + search);
+      dispatch({ type: SET_SEARCH_DATA, payload: Object.values(data)[0] });
     } catch (error) {
       console.log(error);
+      clearData!(CLEAR_SEARCH_DATA);
     }
   };
 
