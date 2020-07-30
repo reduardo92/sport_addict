@@ -1,9 +1,9 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 import styled from 'styled-components';
-import { apiPoint } from '../../components/context/types';
-import { PlayerProps } from '../../components/interfaces/PlayerProps';
-import getData from '../../utility/getData';
+import { apiPoint } from '../../../components/context/types';
+import { PlayerProps } from '../../../components/interfaces/PlayerProps';
+import getData from '../../../utility/getData';
 
 const Styled = styled.section``;
 

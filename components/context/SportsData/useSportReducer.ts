@@ -3,11 +3,13 @@ import {
   CLEAR_FAVORITES,
   CLEAR_MODAL_IMG,
   CLEAR_SEARCH_DATA,
+  CLEAR_SEARCH_FROM,
   GET_FAVORITES,
   REMOVE_FAVORITE,
   SET_LEAGUES_DATA,
   SET_MODAL_IMG,
   SET_SEARCH_DATA,
+  SET_SEARCH_FORM,
   SET_SPORT_DATA,
 } from '../types';
 import { ReducerActionsProps } from './../../interfaces/ReducerProps';
@@ -40,6 +42,23 @@ const useSportReducer = (
         ...state,
         searchData: null,
       };
+    case SET_SEARCH_FORM:
+      return {
+        ...state,
+        searchFrom: {
+          ...state.searchFrom,
+          [action.searchName]: action.payload,
+        },
+      };
+    case CLEAR_SEARCH_FROM:
+      return {
+        ...state,
+        searchFrom: {
+          ...state.searchFrom,
+          search: '',
+        },
+      };
+
     // FAVORITES
     case GET_FAVORITES:
       return {

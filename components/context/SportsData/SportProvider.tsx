@@ -12,6 +12,7 @@ import {
   REMOVE_FAVORITE,
   SET_MODAL_IMG,
   SET_SEARCH_DATA,
+  SET_SEARCH_FORM,
 } from '../types';
 import SportContext, { sportInitalState } from './SportContext';
 import useSportReducer from './useSportReducer';
@@ -89,6 +90,9 @@ const SportProvider = ({ children }: any) => {
     }
   };
 
+  const handleSearchForm = (name: string, value: string) =>
+    dispatch({ type: SET_SEARCH_FORM, searchName: name, payload: value });
+
   console.log(state);
   return (
     <SportContext.Provider
@@ -101,6 +105,7 @@ const SportProvider = ({ children }: any) => {
         removeFavorite,
         getFavorites,
         getSearchData,
+        handleSearchForm,
       }}
     >
       {children}

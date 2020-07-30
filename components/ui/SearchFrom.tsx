@@ -11,7 +11,7 @@ import { BsSearch } from 'react-icons/bs';
 import { MdClear } from 'react-icons/md';
 import styled, { css } from 'styled-components';
 import SportContext from '../context/SportsData/SportContext';
-import { CLEAR_SEARCH_DATA } from '../context/types';
+import { CLEAR_SEARCH_DATA, CLEAR_SEARCH_FROM } from '../context/types';
 import FadeIn from './StyleComponents/keyFrames/FadeIn';
 
 const Styled = styled.div<{ isOption: boolean }>`
@@ -126,29 +126,37 @@ const Styled = styled.div<{ isOption: boolean }>`
   }
 `;
 
-interface SearchFromProps {}
+const SearchFrom: React.FC = () => {
+  const {
+    getSearchData,
+    clearData,
+    searchData,
+    searchFrom: { search, option },
+    handleSearchForm,
+  } = useContext(SportContext);
 
-const SearchFrom: React.FC<SearchFromProps> = () => {
-  const { getSearchData, clearData, searchData } = useContext(SportContext);
-  const [form, setForm] = useState({ search: '', option: 'team' });
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [optionFocus, setOptionFocus] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
-  ) => setForm({ ...form, [e.target.name]: e.target.value });
+  ) => {
+    handleSearchForm!(e.target.name, e.target.value);
+    if (e.target.name !== 'option') return;
+    clearData!(CLEAR_SEARCH_DATA);
+    clearData!(CLEAR_SEARCH_FROM);
+  };
 
   useEffect(() => {
-    if (form.search === '') {
+    if (search === '') {
       clearData!(CLEAR_SEARCH_DATA);
       return;
     } else {
-      getSearchData!(form.search, form.option);
+      getSearchData!(search, option);
     }
-  }, [form.search]);
+  }, [search]);
 
-  console.log(form);
   return (
     <Styled className='search form' isOption={optionFocus}>
       <form
@@ -176,87 +184,103 @@ const SearchFrom: React.FC<SearchFromProps> = () => {
               ref={inputRef}
               type='text'
               name='search'
-              value={form.search}
+              value={search}
               onChange={handleChange}
               onClick={() => setIsFocus(true)}
               onBlur={() => setTimeout(() => setIsFocus(false), 300)}
               placeholder={`Search for a ${
-                form.option === 'team'
+                option === 'team'
                   ? 'team'
-                  : form.option === 'player'
+                  : option === 'player'
                   ? 'player'
                   : 'event'
               }...`}
             />
             <BsSearch className='logout--icon icon is-small is-left' />
           </div>
-          {(isFocus === true || form.search !== '') && (
+          {(isFocus === true || search !== '') && (
             <p className='control'>
               <MdClear
                 className='icon is-small is-right'
-                onClick={() => setForm({ ...form, search: '' })}
+                onClick={() => clearData!(CLEAR_SEARCH_FROM)}
               />
             </p>
           )}
         </div>
       </form>
       <div className='search--content'>
+        {isFocus && !searchData && search !== '' && (
+          <a className='search--tag' aria-label='hello'>
+            <div className='search--content--item'>
+              <div className='wrapper'>
+                <figure className='image is-48x48'>
+                  <img className='is-rounded' src={'/icons/noBadge.png'} />
+                </figure>
+                <p className='search--content--item__name'>No Results</p>
+              </div>
+            </div>
+          </a>
+        )}
         <ul>
-          {searchData?.map((item, i) => (
-            <li key={i}>
-              <Link
-                key={i}
-                href={
-                  item.idPlayer
-                    ? '/player/[playerName]'
-                    : item.idEvent
-                    ? '/events/[eventSport]/[eventName]/[id]'
-                    : '/team/[teamName]/[id]'
-                }
-                as={
-                  item.idPlayer
-                    ? `/player/${item.strPlayer}`
-                    : item.idEvent
-                    ? `/events/${item.strSport}/${item.strEvent}/${item.idEvent}`
-                    : `/team/${item.strTeam}/${item.idTeam}`
-                }
-              >
-                <a className='search--tag' aria-label='hello'>
-                  <div
-                    onClick={() => setForm({ search: '', option: 'team' })}
-                    className='search--content--item'
-                  >
-                    <div className='wrapper'>
-                      <figure className='image is-48x48'>
-                        <img
-                          className='is-rounded'
-                          src={
-                            item.strCutout ||
-                            item.strThumb ||
-                            item.strTeamBadge ||
-                            '/icons/noBadge.png'
-                          }
-                        />
-                      </figure>
-                      <p className='search--content--item__name'>
-                        {item.idPlayer
-                          ? item.strPlayer
-                          : item.idEvent
-                          ? item.strEvent
-                          : item.strTeam}
-                      </p>
-                      <figure className='media--in image is-16x16'>
-                        <img
-                          className='is-rounded'
-                          src={`/icons/${item.strSport.replace(' ', '_')}.png`}
-                        />
-                      </figure>
+          {isFocus &&
+            searchData?.map((item, i) => (
+              <li key={i}>
+                <Link
+                  key={i}
+                  href={
+                    item.idPlayer
+                      ? '/player/[playerName]/[id]'
+                      : item.idEvent
+                      ? '/events/[eventSport]/[eventName]/[id]'
+                      : '/team/[teamName]/[id]'
+                  }
+                  as={
+                    item.idPlayer
+                      ? `/player/${item.strPlayer}/${item.idPlayer}`
+                      : item.idEvent
+                      ? `/events/${item.strSport}/${item.strEvent}/${item.idEvent}`
+                      : `/team/${item.strTeam}/${item.idTeam}`
+                  }
+                >
+                  <a className='search--tag' aria-label='hello'>
+                    <div
+                      onClick={() => clearData!(CLEAR_SEARCH_FROM)}
+                      className='search--content--item'
+                    >
+                      <div className='wrapper'>
+                        <figure className='image is-48x48'>
+                          <img
+                            className='is-rounded'
+                            src={
+                              item.strCutout ||
+                              item.strThumb ||
+                              item.strTeamBadge ||
+                              '/icons/noBadge.png'
+                            }
+                          />
+                        </figure>
+                        <p className='search--content--item__name'>
+                          {item.idPlayer
+                            ? item.strPlayer
+                            : item.idEvent
+                            ? item.strEvent
+                            : item.strTeam}
+                        </p>
+                        <figure className='media--in image is-16x16'>
+                          <img
+                            className='is-rounded'
+                            src={`/icons/${item.strSport.replace(
+                              ' ',
+                              '_'
+                            )}.png`}
+                          />
+                        </figure>
+                      </div>
                     </div>
-                  </div>
-                </a>
-              </Link>
-            </li>
-          ))}
+                  </a>
+                </Link>
+              </li>
+            ))}
         </ul>
       </div>
     </Styled>
