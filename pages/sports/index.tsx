@@ -4,8 +4,8 @@ import { apiPoint } from '../../components/context/types';
 import { AllSports } from '../../components/interfaces/AllSports';
 import { keyProps } from '../../components/interfaces/Key';
 import { Leagues } from '../../components/interfaces/legues';
-import SportHero from '../../components/ui/Sports/SportHero';
 import SportMain from '../../components/ui/Sports/SportMain';
+import TwoSideHero from '../../components/ui/TwoSideHero';
 import getData from '../../utility/getData';
 
 interface SportsProps {
@@ -21,7 +21,7 @@ const Sports: React.FC<SportsProps> = ({
 }) => {
   return (
     <>
-      <SportHero />
+      <TwoSideHero title='LEAGUES' />
       <SportMain
         sportsByQuery={sportsByQuery}
         randomsSports={randomsSports}

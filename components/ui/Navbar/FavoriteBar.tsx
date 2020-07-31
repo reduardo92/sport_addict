@@ -11,7 +11,9 @@ const Styled = styled.div<{ bgClr: string; isDelete: boolean }>`
   width: 100%;
   padding: 0.5em;
   background-color: ${({ bgClr }) =>
-    bgClr === '/sports' ? 'var(--clr-third)' : 'var(--clr-primary)'};
+    bgClr === '/sports' || bgClr === '/player/[playerName]/[id]'
+      ? 'var(--clr-third)'
+      : 'var(--clr-primary)'};
 
   .container {
     display: flex;
@@ -78,7 +80,7 @@ interface FavoriteBarProps {
 
 const FavoriteBar: React.FC<FavoriteBarProps> = () => {
   const [isDelete, SetIsDelete] = useState<boolean>(false);
-  const { pathname } = useRouter();
+  const { route } = useRouter();
 
   const { favorites, getFavorites, clearData } = useContext(SportContext);
   const {
@@ -93,8 +95,9 @@ const FavoriteBar: React.FC<FavoriteBarProps> = () => {
     getFavorites!();
   }, [user]);
 
+  console.log(route);
   return (
-    <Styled className='favorite__bar' bgClr={pathname} isDelete={isDelete}>
+    <Styled className='favorite__bar' bgClr={route} isDelete={isDelete}>
       <div className='container'>
         <button
           style={isDelete ? { filter: 'invert(1)' } : {}}

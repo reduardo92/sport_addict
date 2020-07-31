@@ -16,6 +16,7 @@ const Styled = styled.section`
   }
 
   & .containerr {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,6 +24,20 @@ const Styled = styled.section`
     text-align: center;
     overflow: hidden;
     padding: 0 1em;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: url('/imgs/black_lines.svg') no-repeat center center;
+      background-size: cover;
+      clip-path: 1px;
+      filter: drop-shadow(20px 8px 34px black);
+      z-index: -1;
+    }
 
     .title {
       letter-spacing: 5px;
