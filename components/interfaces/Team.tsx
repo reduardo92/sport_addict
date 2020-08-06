@@ -65,4 +65,7 @@ export interface Team {
   // for Sports
   strBadge?: string;
   uid?: string;
+  idPlayer?: string;
+  strCutout: string;
+  strPlayer: string;
 }

@@ -26,4 +26,5 @@ export interface Sport {
   strLeagueAlternate: string;
   strTeam?: string;
   uid?: string;
+  idPlayer?: string;
 }

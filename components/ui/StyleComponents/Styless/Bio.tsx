@@ -34,10 +34,10 @@ const Styled = styled.div`
 `;
 
 interface BioProps {
-  bio: string;
+  bio?: string;
 }
 
-const Bio: React.FC<BioProps> = ({ bio }) => {
+const Bio: React.FC<BioProps> = ({ bio = '' }) => {
   const [bioActive, setBioActive] = useState(false);
 
   const bioCondetion = () => {

@@ -4,14 +4,11 @@ import styled from 'styled-components';
 import AlertContext from '../context/alert/AlertContext';
 import AuthContext from '../context/auth/AuthContext';
 import SportContext from '../context/SportsData/SportContext';
-import { Leagues } from '../interfaces/legues';
-import { Sport } from '../interfaces/Sport';
-import { Team } from '../interfaces/Team';
 
 const Styled = styled.button``;
 
 export interface FavoriteBtnProps {
-  favItem: Leagues | Team | Sport;
+  favItem: any;
   id: string;
 }
 
@@ -23,33 +20,41 @@ const FavoriteBtn: React.FC<FavoriteBtnProps> = ({ favItem, id }) => {
     state: { user },
   } = useContext(AuthContext);
 
+  console.log(favItem);
   useEffect(() => {
     const checkFavorite = favorites.find((item) => {
+      if (item.idPlayer) return item.idPlayer === id;
       if (item.idTeam) return item.idTeam === id;
       return item.idLeague === id;
     });
+
+    console.log(checkFavorite, 'from Favorite');
 
     if (checkFavorite) return setIsAdd(true);
     if (!checkFavorite) return setIsAdd(false);
   }, [favorites, favItem]);
 
-  // Get Name
-  const name = favItem.strTeam ? favItem.strTeam : favItem.strLeague;
+  const name = () => {
+    if (favItem.strPlayer) return favItem.strPlayer;
+    if (favItem.strTeam) return favItem.strTeam;
+    if (favItem.strLeague) return favItem.strLeague;
+  };
 
   const handleFavorite = () => {
     addFavorite!(favItem!);
-    setAlert!(`${name!} Added`, 'success');
+    setAlert!(`${name()!} Added`, 'success');
   };
 
   const handleDeleteFavorite = () => {
     const getUid = favorites.find((item) => {
+      if (item.idPlayer) return item.idPlayer === id;
       if (item.idTeam) return item.idTeam === id;
       return item.idLeague === id;
     });
 
-    // console.log('fromgandfle', getUid?.uid);
+    console.log('fromgandfle', getUid?.uid);
     removeFavorite!(getUid?.uid!);
-    setAlert!(`${name!} Removed`, 'warning');
+    setAlert!(`${name()!} Removed`, 'warning');
   };
 
   return (

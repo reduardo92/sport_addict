@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { apiPoint } from '../../../components/context/types';
 import { PlayerProps } from '../../../components/interfaces/PlayerProps';
+import DiscriptionSection from '../../../components/ui/DiscriptionSection';
 import TwoSideHero from '../../../components/ui/TwoSideHero';
 import getData from '../../../utility/getData';
 
@@ -21,9 +22,9 @@ const PlayerProfile: React.FC<PlayerProfileProps> = ({
   formerTeams,
   playerContracts,
 }) => {
-  console.log('HO', honours);
-  console.log('FORMer', formerTeams);
-  console.log('Contract', playerContracts);
+  // console.log('HO', honours);
+  // console.log('FORMer', formerTeams);
+  // console.log('Contract', playerContracts);
 
   return (
     <>
@@ -32,6 +33,7 @@ const PlayerProfile: React.FC<PlayerProfileProps> = ({
         playerHero
         imgSrc={player.strCutout}
       />
+      <DiscriptionSection player={player} isPlayer />
     </>
   );
 };

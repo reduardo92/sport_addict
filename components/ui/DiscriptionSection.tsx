@@ -70,8 +70,6 @@ const Styled = styled.section<styledProps>`
   }
 `;
 
-// type data = Team & PlayerProps;
-
 interface DiscriptionSectionProps {
   team?: Team;
   player?: PlayerProps;
@@ -99,7 +97,10 @@ const DiscriptionSection: React.FC<DiscriptionSectionProps> = ({
         <div className='head'>
           <h2 className='title subtitle'>DESCRIPTION</h2>
           <div className='icons--conntainer'>
-            <FavoriteBtn favItem={team!} id={team?.idTeam!} />
+            <FavoriteBtn
+              favItem={team! || player!}
+              id={team?.idTeam! || player?.idPlayer!}
+            />
             <SocialLinks data={team! || player!} />
           </div>
         </div>
@@ -128,7 +129,7 @@ const DiscriptionSection: React.FC<DiscriptionSectionProps> = ({
         </div>
         <div className='Biography'>
           <Paragraph text='Biography' clr />
-          <Bio bio={team!.strDescriptionEN || ''} />
+          <Bio bio={team?.strDescriptionEN || player?.strDescriptionEN} />
         </div>
       </div>
       <SideStrips />

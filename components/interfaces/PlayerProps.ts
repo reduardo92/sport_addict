@@ -1,5 +1,5 @@
 export interface PlayerProps {
-  idPlayer: string;
+  idPlayer?: string;
   idTeam: string;
   idTeam2: string;
   idTeamNational: string;

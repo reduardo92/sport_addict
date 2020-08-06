@@ -95,7 +95,6 @@ const FavoriteBar: React.FC<FavoriteBarProps> = () => {
     getFavorites!();
   }, [user]);
 
-  console.log(route);
   return (
     <Styled className='favorite__bar' bgClr={route} isDelete={isDelete}>
       <div className='container'>
@@ -111,17 +110,21 @@ const FavoriteBar: React.FC<FavoriteBarProps> = () => {
             <Badge
               key={item.uid}
               href={
-                item.idTeam
+                item.idPlayer
+                  ? '/player/[playerName]/[id]'
+                  : item.idTeam
                   ? '/team/[teamName]/[id]'
                   : '/sports/[sport]/[sportName]/[id]'
               }
               as={
-                item.idTeam
+                item.idPlayer
+                  ? `/player/${item.strPlayer}/${item.idPlayer}`
+                  : item.idTeam
                   ? `/team/${item.strTeam}/${item.idTeam}`
                   : `/sports/${item.strSport}/${item.strLeague}/${item.idLeague}`
               }
               title=''
-              src={item.strTeamBadge || item.strBadge}
+              src={item.strTeamBadge || item.strBadge || item.strCutout}
               className='favorite__team'
               setScroll
               isFavorite={

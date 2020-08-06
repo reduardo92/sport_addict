@@ -22,7 +22,7 @@ export interface SportStateProps {
   allSports: AllSports[] | null;
   leagues: Leagues[] | null;
   modalImg: { isActive: boolean; src: string };
-  favorites: Team[] & Sport[];
+  favorites: Team[] & Sport[] & PlayerProps[];
   searchData: null | searchProps[];
   searchFrom: SearchForm;
   clearData?: (type: string) => void;
