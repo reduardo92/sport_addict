@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import setDateFormat from '../../utility/setDateFormat';
 import { PlayerProps } from '../interfaces/PlayerProps';
 import { Team } from '../interfaces/Team';
 import FactContent from './FactContent';
@@ -126,6 +127,24 @@ const DiscriptionSection: React.FC<DiscriptionSectionProps> = ({
             </>
           )}
           {/* For Palyer */}
+          {!team && (
+            <>
+              <FactContent
+                title='Born'
+                subTitle={setDateFormat(player?.dateBorn!)}
+              />
+              <FactContent
+                title='Birth Place'
+                subTitle={player?.strBirthLocation}
+              />
+              <FactContent title='Height' subTitle={player?.strHeight} />
+              <FactContent title='Weight' subTitle={player?.strWeight} />
+              <FactContent title='Position'>{player?.strPosition}</FactContent>
+              <FactContent title='Team Number'>{player?.strNumber}</FactContent>
+              <FactContent title='Sport'>{player?.strSport}</FactContent>
+              <FactContent title='Current Team'>{player?.strTeam}</FactContent>
+            </>
+          )}
         </div>
         <div className='Biography'>
           <Paragraph text='Biography' clr />

@@ -157,6 +157,7 @@ const TwoSlides: React.FC<TwoSlidesProps> = ({
   isFlip,
   isSideBlack,
   isMirror,
+  children,
 }) => (
   <Styled className='two--slides' bgClr={bgClr} sideBg={sideBg} isFlip={isFlip}>
     <SideStrips
@@ -176,6 +177,7 @@ const TwoSlides: React.FC<TwoSlidesProps> = ({
           ))}
         </div>
       )}
+      {children}
     </div>
     <div
       className={`side--image  ${avatarShow && 'push--up'} ${

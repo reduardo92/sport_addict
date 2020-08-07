@@ -2,29 +2,35 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import styled from 'styled-components';
 import { apiPoint } from '../../../components/context/types';
+import { FormerTeamsProps } from '../../../components/interfaces/FormerTeamsProps';
+import { HonorsProps } from '../../../components/interfaces/HonorsProps';
 import { PlayerProps } from '../../../components/interfaces/PlayerProps';
+import Badge from '../../../components/ui/Badge';
+import ColumsSection from '../../../components/ui/ColumsSection';
 import DiscriptionSection from '../../../components/ui/DiscriptionSection';
+import ImgColum from '../../../components/ui/ImgColum';
+import BannerImg from '../../../components/ui/StyleComponents/Styless/BannerImg';
 import TwoSideHero from '../../../components/ui/TwoSideHero';
+import TwoSlides from '../../../components/ui/TwoSides/TwoSlides';
 import getData from '../../../utility/getData';
 
 const Styled = styled.section``;
 
 interface PlayerProfileProps {
   player: PlayerProps;
-  honours: any;
-  formerTeams: any;
-  playerContracts: any;
+  formerTeams: FormerTeamsProps[];
 }
 
 const PlayerProfile: React.FC<PlayerProfileProps> = ({
   player,
-  honours,
   formerTeams,
-  playerContracts,
 }) => {
-  // console.log('HO', honours);
-  // console.log('FORMer', formerTeams);
-  // console.log('Contract', playerContracts);
+  const fanArry: string[] = [
+    player.strFanart1,
+    player.strFanart2,
+    player.strFanart3,
+    player.strFanart4,
+  ];
 
   return (
     <>
@@ -34,6 +40,41 @@ const PlayerProfile: React.FC<PlayerProfileProps> = ({
         imgSrc={player.strCutout}
       />
       <DiscriptionSection player={player} isPlayer />
+      <TwoSlides
+        title='Former Teams'
+        href=''
+        as=''
+        sideBg={player.strFanart2}
+        isMirror
+        isSideBlack
+        titleClass='title--dark'
+      >
+        <div className='columns is-mobile ' style={{ marginTop: '2em' }}>
+          {formerTeams.map((team) => (
+            <Badge
+              key={team.idFormerTeam}
+              href='/team/[teamName]/[id]'
+              as={`/team/${team.strFormerTeam}/${team.idFormerTeam}`}
+              title={team.strFormerTeam}
+              src={team.strTeamBadge}
+              className='column'
+              clr
+              setScroll
+            />
+          ))}
+        </div>
+      </TwoSlides>
+      <div
+        className='player--fanArt'
+        style={{ backgroundColor: 'var(--clr-third)', padding: '2em' }}
+      >
+        <ColumsSection title='fanart' className='fanart container'>
+          {fanArry.map(
+            (art: string) => art && <ImgColum key={art} item={art} isColumn />
+          )}
+        </ColumsSection>
+      </div>
+      <BannerImg bannerHero={player.strFanart3 || player.strFanart2} />
     </>
   );
 };
@@ -55,8 +96,12 @@ export const getServerSideProps: GetServerSideProps<PlayerProfileProps> = async 
   const { players }: { players: PlayerProps } = await getData(
     lookUp_player_id + params?.id
   );
-  const honours = await getData(lookUp_honours_player_id + params?.id);
-  const formerTeams = await getData(lookUp_former_team_player_id + params?.id);
+  const { honors }: { honors: HonorsProps[] } = await getData(
+    lookUp_honours_player_id + params?.id
+  );
+  const { formerteams }: { formerteams: FormerTeamsProps[] } = await getData(
+    lookUp_former_team_player_id + params?.id
+  );
   const playerContracts = await getData(
     lookUp_contracts_player_id + params?.id
   );
@@ -64,9 +109,7 @@ export const getServerSideProps: GetServerSideProps<PlayerProfileProps> = async 
   return {
     props: {
       player: Object.values(players)[0],
-      honours,
-      formerTeams,
-      playerContracts,
+      formerTeams: Object.values(formerteams),
     },
   };
 };
