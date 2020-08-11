@@ -20,15 +20,12 @@ const FavoriteBtn: React.FC<FavoriteBtnProps> = ({ favItem, id }) => {
     state: { user },
   } = useContext(AuthContext);
 
-  console.log(favItem);
   useEffect(() => {
     const checkFavorite = favorites.find((item) => {
       if (item.idPlayer) return item.idPlayer === id;
       if (item.idTeam) return item.idTeam === id;
       return item.idLeague === id;
     });
-
-    console.log(checkFavorite, 'from Favorite');
 
     if (checkFavorite) return setIsAdd(true);
     if (!checkFavorite) return setIsAdd(false);
@@ -52,7 +49,6 @@ const FavoriteBtn: React.FC<FavoriteBtnProps> = ({ favItem, id }) => {
       return item.idLeague === id;
     });
 
-    console.log('fromgandfle', getUid?.uid);
     removeFavorite!(getUid?.uid!);
     setAlert!(`${name()!} Removed`, 'warning');
   };

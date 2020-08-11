@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import { auth, db } from '../../../LIB/db';
 import getData from '../../../utility/getData';
 import { Leagues } from '../../interfaces/legues';
+import { PlayerProps } from '../../interfaces/PlayerProps';
 import { Sport } from '../../interfaces/Sport';
 import { Team } from '../../interfaces/Team';
 import {
@@ -47,7 +48,7 @@ const SportProvider = ({ children }: any) => {
     }
   };
 
-  const addFavorite = async (obj: Sport | Team | Leagues) => {
+  const addFavorite = async (obj: Sport | Team | Leagues | PlayerProps) => {
     const setFav = db.collection('favorites').doc();
     await setFav.set({
       uid: setFav.id,
@@ -93,7 +94,7 @@ const SportProvider = ({ children }: any) => {
   const handleSearchForm = (name: string, value: string) =>
     dispatch({ type: SET_SEARCH_FORM, searchName: name, payload: value });
 
-  console.log(state);
+  // console.log(state);
   return (
     <SportContext.Provider
       value={{

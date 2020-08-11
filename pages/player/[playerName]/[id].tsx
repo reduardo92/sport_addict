@@ -1,9 +1,7 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import styled from 'styled-components';
 import { apiPoint } from '../../../components/context/types';
 import { FormerTeamsProps } from '../../../components/interfaces/FormerTeamsProps';
-import { HonorsProps } from '../../../components/interfaces/HonorsProps';
 import { PlayerProps } from '../../../components/interfaces/PlayerProps';
 import Badge from '../../../components/ui/Badge';
 import ColumsSection from '../../../components/ui/ColumsSection';
@@ -13,8 +11,6 @@ import BannerImg from '../../../components/ui/StyleComponents/Styless/BannerImg'
 import TwoSideHero from '../../../components/ui/TwoSideHero';
 import TwoSlides from '../../../components/ui/TwoSides/TwoSlides';
 import getData from '../../../utility/getData';
-
-const Styled = styled.section``;
 
 interface PlayerProfileProps {
   player: PlayerProps;
@@ -48,6 +44,7 @@ const PlayerProfile: React.FC<PlayerProfileProps> = ({
         isMirror
         isSideBlack
         titleClass='title--dark'
+        btnHide
       >
         <div className='columns is-mobile ' style={{ marginTop: '2em' }}>
           {formerTeams.map((team) => (
@@ -96,14 +93,9 @@ export const getServerSideProps: GetServerSideProps<PlayerProfileProps> = async 
   const { players }: { players: PlayerProps } = await getData(
     lookUp_player_id + params?.id
   );
-  const { honors }: { honors: HonorsProps[] } = await getData(
-    lookUp_honours_player_id + params?.id
-  );
+
   const { formerteams }: { formerteams: FormerTeamsProps[] } = await getData(
     lookUp_former_team_player_id + params?.id
-  );
-  const playerContracts = await getData(
-    lookUp_contracts_player_id + params?.id
   );
 
   return {

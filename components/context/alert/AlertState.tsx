@@ -15,7 +15,7 @@ const AlertState = ({ children }: any) => {
     setTimeout(() => setAlerts(null), timeout);
   };
 
-  console.log('froma Alert', alerts);
+  // console.log('froma Alert', alerts);
   return (
     <AlertContext.Provider value={{ alerts, setAlert }}>
       {children}

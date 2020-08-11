@@ -10,7 +10,7 @@ const Styled = styled.section<StyledProps>`
   .banner--hero {
     min-height: calc(17vh + 3em);
     background: url(${({ bannerHero }) =>
-      bannerHero ? bannerHero : '/imgs/grass.jpg'})
+        bannerHero ? bannerHero : '/imgs/grass.jpg'})
       no-repeat;
     background-size: cover;
     background-position: center;
@@ -49,12 +49,12 @@ const Styled = styled.section<StyledProps>`
     }
   }
 
-
   @media screen and (min-width: ${mediaSizes.table}) {
     .banner--name {
-    &::before,
-    &::after {
-      max-width: 120px;
+      &::before,
+      &::after {
+        max-width: 120px;
+      }
     }
   }
 `;
